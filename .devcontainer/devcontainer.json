@@ -1,0 +1,7 @@
+{
+  "name": "id_utils Dev Container",
+  "dockerComposeFile": "../oci/compose-dev.yml",
+  "service": "dev",
+  "workspaceFolder": "/app",
+  "overrideCommand": true
+}
