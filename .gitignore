@@ -1,0 +1,36 @@
+# compilation artifacts
+/_build/
+
+# archive artifacts (built via "mix archive.build").
+*.ez
+
+# package tarball (built via "mix hex.build").
+id_utils-*.tar
+
+# dependencies sources
+/deps/
+/.fetch
+/.hex-docs/
+/.hex-packages/
+
+# generated docs (built via "mix docs")
+/doc/
+
+# test coverage assets (built via "mix test --cover")
+/cover/
+
+# language server artifacts
+/.expert/
+/.elixir_ls/
+.dexter.db
+.dexter.db-shm
+.dexter.db-wal
+
+# temporary files
+/tmp/
+
+# VM crash dump
+erl_crash.dump
+
+# environment
+.env
