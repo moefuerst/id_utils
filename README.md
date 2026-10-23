@@ -1,0 +1,124 @@
+# IDUtils
+
+Utilities for working with persistent identifiers used in scholarly communication.
+
+
+## Installation
+
+Add `id_utils` to your dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:id_utils, git: "https://github.com/moefuerst/id_utils.git", tag: "0.0.1"}
+  ]
+end
+```
+
+
+## Development
+
+You can develop IDUtils on your local machine directly or using the provided dev container.
+
+### Using Local Elixir/Erlang
+
+Make sure Elixir and Erlang are available on your development machine. The required local tool 
+versions are listed in `mise.toml` for use with [mise-en-place](https://mise.jdx.dev/) or similar
+tools.
+
+1. Navigate to the project directory and install the required Elixir and Erlang versions
+   (if using `mise`):
+   ```bash
+   mise install
+   ```
+2. Fetch dependencies:
+   ```bash
+   mix deps.get
+   ```
+3. Compile the project:
+   ```bash
+   mix compile
+   ```
+4. Start the project in interactive mode (dev env):
+   ```bash
+   iex -S mix
+   ```
+
+### Using Docker
+
+1. Fetch and install dependencies:
+   ```bash
+   make deps
+   ```
+2. Start a local development container:
+   ```bash
+   make dev
+   ```
+
+This will drop you into an interactive bash shell inside an ephemeral application container. From
+there, you can start an IEx shell and run the project in interactive mode with `iex -S mix`.
+
+Your local working directory is mounted inside the container for development using the editing
+tools on your development machine. Dependencies and build artifacts are cached in named Docker 
+volumes and persist across sessions.
+
+To show all available targets, run
+
+```bash
+make help
+```
+
+Alternatively, a `devcontainer.json` spec file is provided for use with tools supporting 
+[dev containers](https://containers.dev).
+
+
+## Documentation
+
+To generate the project documentation locally, run:
+
+```bash
+mix docs
+```
+
+You can then open `doc/index.html` in your browser.
+
+
+## Tests
+
+```bash
+mix test
+```
+
+
+## Code quality checks
+
+The codebase is set up to perform quality checks using `credo`, `dialyzer` and the `styler` format
+plugin. It's usually faster to not bother with individual checks and use one of the following 
+aliases to run all of them.
+
+To format your code, run all static analysis tools, and run the test suite, use:
+
+```bash
+mix precommit
+```
+
+For the checks that are performed by CI, use:
+
+```bash
+mix check
+```
+
+
+## Contributing
+
+Feedback, bug reports, feature requests, and other contributions are most welcome. Please open an
+[Issue](https://github.com/moefuerst/id_utils/issues) first if your change is larger in scope.
+Please run `mix precommit` before committing your changes and `mix check` before pushing a branch.
+
+
+## License
+
+Copyright (C) 2026 Moritz F. Fürst
+
+IDUtils is free software; you can redistribute it and/or modify it under the terms of the 
+Revised BSD License, see `LICENSE`.
