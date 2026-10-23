@@ -2,7 +2,7 @@ services:
   test:
     build:
       context: ..
-      dockerfile: oci/Dockerfile
+      dockerfile: oci/Containerfile
     volumes:
       - ..:/app
       - mix_deps:/app/deps
