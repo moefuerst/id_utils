@@ -6,6 +6,27 @@ defmodule IDUtils.Checksum do
   # Public API
 
   @doc """
+  Computes a ISO 7064 MOD 11-2 check digit.
+
+  ## Examples
+
+      iex> IDUtils.Checksum.mod_11_2("000000021825009")
+      "7"
+
+      iex> IDUtils.Checksum.mod_11_2("000000021694233")
+      "X"
+  """
+  @spec mod_11_2(binary()) :: binary()
+  def mod_11_2(<<_, _::binary>> = digits) do
+    total = mod_11_2_total(digits, 0)
+
+    case rem(12 - rem(total, 11), 11) do
+      10 -> "X"
+      digit -> Integer.to_string(digit)
+    end
+  end
+
+  @doc """
   Computes a ISO 3297/ISO 2108 weighted MOD 11 check digit.
 
   ## Examples
@@ -30,6 +51,12 @@ defmodule IDUtils.Checksum do
   end
 
   # Private helpers
+
+  defp mod_11_2_total(<<digit, rest::binary>>, total) when digit in ?0..?9 do
+    mod_11_2_total(rest, (total + digit - ?0) * 2)
+  end
+
+  defp mod_11_2_total(<<>>, total), do: total
 
   defp mod_11_weighted_total(<<digit, rest::binary>>, weight, total) when digit in ?0..?9 do
     mod_11_weighted_total(rest, weight - 1, total + (digit - ?0) * weight)
