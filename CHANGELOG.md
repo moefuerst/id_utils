@@ -6,11 +6,14 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-  * Added `IDUtils.Checksum` shared checksum algorithm module.
-  * Added schemes `IDUtils.Schemes.DOI`, `IDUtils.Schemes.ISSN`, and `IDUtils.Schemes.URL`. 
-  * Added `IDUtils.Scheme` behaviour.
+  * `IDUtils.Checksum` shared checksum algorithm module.
+  * Scheme modules `IDUtils.Schemes.DOI`, `IDUtils.Schemes.ISSN`, `IDUtils.Schemes.ORCID`, 
+    and `IDUtils.Schemes.URL`. 
+  * `IDUtils.Scheme` behaviour.
   * Initialize project.
 
 ### Development
-  
+
+  * Added container tooling.
+  * Added CI setup.
   * Hex package setup.
