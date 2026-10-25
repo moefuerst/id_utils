@@ -6,7 +6,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-  * Added schemes `IDUtils.Schemes.DOI`, and `IDUtils.Schemes.URL`. 
+  * Added `IDUtils.Checksum` shared checksum algorithm module.
+  * Added schemes `IDUtils.Schemes.DOI`, `IDUtils.Schemes.ISSN`, and `IDUtils.Schemes.URL`. 
   * Added `IDUtils.Scheme` behaviour.
   * Initialize project.
 
