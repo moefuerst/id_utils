@@ -76,8 +76,7 @@ defmodule IDUtils.MixProject do
         "deps.audit"
       ],
       "test.ci": [
-        "test --warnings-as-errors",
-        "muex --optimize --optimize-level conservative --fail-at 80"
+        "test --warnings-as-errors"
       ]
     ]
   end

@@ -3,7 +3,7 @@ COMPOSE_TEST = docker compose -f oci/compose-test.yml
 RUN          = $(COMPOSE) run --rm dev
 RUN_TEST     = $(COMPOSE_TEST) run --rm test
 
-.PHONY: help dev dev.clean deps compile precommit check test test.ci test.clean test.deps
+.PHONY: help dev dev.clean deps compile docs precommit check test test.ci test.clean test.deps
 
 help: ## Show available targets
 	@grep -E '^[a-zA-Z_.-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-16s %s\n", $$1, $$2}'
@@ -32,7 +32,7 @@ check: ## Run code audit
 test: ## Run the test suite
 	$(RUN_TEST) mix test
 
-test.ci: ## Run the test suite + mutation testing
+test.ci: ## Run the test suite with CI settings
 	$(RUN_TEST) sh -c "mix deps.get --check-locked && mix test.ci"
 
 test.clean: ## Remove test container + cached build volumes

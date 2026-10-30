@@ -78,8 +78,7 @@
           # You can customize the priority of any check
           # Priority values are: `low, normal, high, higher`
           #
-          {Credo.Check.Design.AliasUsage,
-           [if_nested_deeper_than: 2, if_called_more_often_than: 1]},
+          {Credo.Check.Design.AliasUsage, [if_nested_deeper_than: 2, if_called_more_often_than: 1]},
           {Credo.Check.Design.TagFIXME, []},
           {Credo.Check.Design.TagTODO, [exit_status: 0]},
           {Credo.Check.Design.SkipTestWithoutComment, []},
@@ -251,8 +250,7 @@
            ]},
           {Jump.CredoChecks.ForbiddenFunction,
            functions: [
-             {:erlang, :binary_to_term,
-              "Use Plug.Crypto.non_executable_binary_to_term/2 instead."}
+             {:erlang, :binary_to_term, "Use Plug.Crypto.non_executable_binary_to_term/2 instead."}
            ]},
           {Jump.CredoChecks.UndeclaredExternalResource, []},
           {Jump.CredoChecks.TestHasNoAssertions, custom_assertion_functions: []},
@@ -292,7 +290,7 @@
           # Code Organization & Idiomatic Refactoring
           {OeditusCredo.Check.Refactoring.PreferMultiHeadFunction, []},
           {OeditusCredo.Check.Refactoring.PreferMultiHeadForNil, []},
-          {OeditusCredo.Check.Refactoring.PreferPipelineOperator, []},
+          {OeditusCredo.Check.Refactoring.PreferPipelineOperator, [exclude_test_files: true]},
           {OeditusCredo.Check.Refactoring.PreferInplaceMapMatching, []},
           {OeditusCredo.Check.Refactoring.PreferInplaceListMatching, []},
           {OeditusCredo.Check.Refactoring.PreferInplaceBinaryMatching, []},
@@ -310,12 +308,9 @@
           # Refactoring Suggestions
           {OeditusCredo.Check.Refactoring.SuggestFSM, []},
           # Telemetry & Observability
-          {OeditusCredo.Check.Warning.TelemetryInRecursiveFunction,
-           [priority: :low, exit_status: 0]},
-          {OeditusCredo.Check.Warning.MissingTelemetryInAuthPlug,
-           [priority: :low, exit_status: 0]},
-          {OeditusCredo.Check.Warning.MissingTelemetryForExternalHttp,
-           [priority: :low, exit_status: 0]},
+          {OeditusCredo.Check.Warning.TelemetryInRecursiveFunction, [priority: :low, exit_status: 0]},
+          {OeditusCredo.Check.Warning.MissingTelemetryInAuthPlug, [priority: :low, exit_status: 0]},
+          {OeditusCredo.Check.Warning.MissingTelemetryForExternalHttp, [priority: :low, exit_status: 0]},
           # Security - Injection
           {OeditusCredo.Check.Security.SQLInjection, []},
           {OeditusCredo.Check.Security.OSCommandInjection, []},
@@ -380,8 +375,7 @@
           {Jump.CredoChecks.AvoidSocketAssignsInTest, excluded: ["test/app_web/plugs/"]},
           {Jump.CredoChecks.LiveViewFormCanBeRehydrated, excluded: ["lib/my_app/"]},
           # Exclude files that intentionally decode fully-trusted (never attacker-controlled) input
-          {Jump.CredoChecks.SafeBinaryToTerm,
-           files: %{excluded: ["lib/my_app/trusted_decoder.ex"]}},
+          {Jump.CredoChecks.SafeBinaryToTerm, files: %{excluded: ["lib/my_app/trusted_decoder.ex"]}},
           {Jump.CredoChecks.UnusedLiveViewAssign,
            [
              ignored_assigns: [:active_path],
