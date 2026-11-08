@@ -1,0 +1,1163 @@
+// The initial developer of some parts of this test data which are derived from the test suite of
+// idutils (https://github.com/inveniosoftware/idutils), is CERN. Copyright 2015-2022 CERN.
+// Copyright 2015-2018 Alan Rubin. Copyright 2025 Will Riley. Copyright 2026 University of
+// Münster. idutils is licensed under a revised BSD license. See NOTICE.
+// Source SHA-256: 47318560b1646208a3d25375ccb1ab34fe75b090d41e2897b2820f99e1949747
+// 
+// Converted to JSON, existing cases have been modified and new cases added.
+[
+  {
+    "input": "urn:isbn:0451450523",
+    "matches": [
+      "urn",
+      "isbn"
+    ],
+    "canonical": "urn:isbn:0451450523",
+    "url": null
+  },
+  {
+    "input": "urn:isan:0000-0000-9E59-0000-O-0000-0000-2",
+    "matches": [
+      "urn"
+    ],
+    "canonical": "urn:isan:0000-0000-9E59-0000-O-0000-0000-2",
+    "url": null
+  },
+  {
+    "input": "urn:issn:0167-6423",
+    "matches": [
+      "urn"
+    ],
+    "canonical": "urn:issn:0167-6423",
+    "url": null
+  },
+  {
+    "input": "urn:ietf:rfc:2648",
+    "matches": [
+      "urn"
+    ],
+    "canonical": "urn:ietf:rfc:2648",
+    "url": null
+  },
+  {
+    "input": "urn:mpeg:mpeg7:schema:2001",
+    "matches": [
+      "urn"
+    ],
+    "canonical": "urn:mpeg:mpeg7:schema:2001",
+    "url": null
+  },
+  {
+    "input": "urn:oid:2.16.840",
+    "matches": [
+      "urn"
+    ],
+    "canonical": "urn:oid:2.16.840",
+    "url": null
+  },
+  {
+    "input": "urn:uuid:6e8bc430-9c3a-11d9-9669-0800200c9a66",
+    "matches": [
+      "urn"
+    ],
+    "canonical": "urn:uuid:6e8bc430-9c3a-11d9-9669-0800200c9a66",
+    "url": null
+  },
+  {
+    "input": "urn:nbn:de:bvb:19-146642",
+    "matches": [
+      "urn"
+    ],
+    "canonical": "urn:nbn:de:bvb:19-146642",
+    "url": "https://nbn-resolving.org/urn:nbn:de:bvb:19-146642"
+  },
+  {
+    "input": "urn:nbn:de:101:1-201102033592",
+    "matches": [
+      "urn"
+    ],
+    "canonical": "urn:nbn:de:101:1-201102033592",
+    "url": "https://nbn-resolving.org/urn:nbn:de:101:1-201102033592"
+  },
+  {
+    "input": "urn:lex:eu:council:directive:2010-03-09;2010-19-UE",
+    "matches": [
+      "urn"
+    ],
+    "canonical": "urn:lex:eu:council:directive:2010-03-09;2010-19-UE",
+    "url": null
+  },
+  {
+    "input": "ark:/13030/tqb3kh97gh8w",
+    "matches": [
+      "ark"
+    ],
+    "canonical": "ark:13030/tqb3kh97gh8w",
+    "url": null
+  },
+  {
+    "input": "ark:/c8131/g3js3v",
+    "matches": [
+      "ark"
+    ],
+    "canonical": "ark:c8131/g3js3v",
+    "url": null
+  },
+  {
+    "input": "ark:c8131/g3js3v.1",
+    "matches": [
+      "ark"
+    ],
+    "canonical": "ark:c8131/g3js3v.1",
+    "url": null
+  },
+  {
+    "input": "pmh:oai:bnf.fr:gallica/ark:/12148/bpt6k103110n",
+    "matches": [
+      "ark",
+      "oai"
+    ],
+    "canonical": "ark:12148/bpt6k103110n",
+    "url": null
+  },
+  {
+    "input": "http://www.example.org/resolver/ark:/13030/tqb3kh97gh8w",
+    "matches": [
+      "ark",
+      "url"
+    ],
+    "canonical": "ark:13030/tqb3kh97gh8w",
+    "url": null
+  },
+  {
+    "input": "https://digital.library.unt.edu/ark:/67531/metadc1106329/m2/1/high_res_d/6148835.pdf",
+    "matches": [
+      "ark",
+      "url"
+    ],
+    "canonical": "ark:67531/metadc1106329/m2/1/high_res_d/6148835.pdf",
+    "url": null
+  },
+  {
+    "input": "ark:/67531/metadc1106329/m2/1/high_res_d/6148835.pdf",
+    "matches": [
+      "ark"
+    ],
+    "canonical": "ark:67531/metadc1106329/m2/1/high_res_d/6148835.pdf",
+    "url": null
+  },
+  {
+    "input": "10.1016/j.epsl.2011.11.037",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1016/j.epsl.2011.11.037",
+    "url": "https://doi.org/10.1016/j.epsl.2011.11.037"
+  },
+  {
+    "input": "doi:10.1016/j.epsl.2011.11.037",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1016/j.epsl.2011.11.037",
+    "url": "https://doi.org/10.1016/j.epsl.2011.11.037"
+  },
+  {
+    "input": "doi: 10.1016/j.epsl.2011.11.037",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1016/j.epsl.2011.11.037",
+    "url": "https://doi.org/10.1016/j.epsl.2011.11.037"
+  },
+  {
+    "input": "DOI:10.1016/j.epsl.2011.11.037",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1016/j.epsl.2011.11.037",
+    "url": "https://doi.org/10.1016/j.epsl.2011.11.037"
+  },
+  {
+    "input": "info:doi/10.1016/j.epsl.2011.11.037",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1016/j.epsl.2011.11.037",
+    "url": "https://doi.org/10.1016/j.epsl.2011.11.037"
+  },
+  {
+    "input": "http://dx.doi.org/10.1016/j.epsl.2011.11.037",
+    "matches": [
+      "doi",
+      "url"
+    ],
+    "canonical": "10.1016/j.epsl.2011.11.037",
+    "url": "https://doi.org/10.1016/j.epsl.2011.11.037"
+  },
+  {
+    "input": "https://doi.org/10.1016/j.epsl.2011.11.037",
+    "matches": [
+      "doi",
+      "url"
+    ],
+    "canonical": "10.1016/j.epsl.2011.11.037",
+    "url": "https://doi.org/10.1016/j.epsl.2011.11.037"
+  },
+  {
+    "input": "doi.org/10.1016/j.epsl.2011.11.037",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1016/j.epsl.2011.11.037",
+    "url": "https://doi.org/10.1016/j.epsl.2011.11.037"
+  },
+  {
+    "input": "10.1007/978-1-4842-6124-8_8",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1007/978-1-4842-6124-8_8",
+    "url": "https://doi.org/10.1007/978-1-4842-6124-8_8"
+  },
+  {
+    "input": "10.1093/acprof:oso/9780198265658.002.0009",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1093/acprof:oso/9780198265658.002.0009",
+    "url": "https://doi.org/10.1093/acprof:oso/9780198265658.002.0009"
+  },
+  {
+    "input": "info:doi/10.7717/peerj-cs.3256/table-4",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.7717/peerj-cs.3256/table-4",
+    "url": "https://doi.org/10.7717/peerj-cs.3256/table-4"
+  },
+  {
+    "input": "10.1016/üникóδé-дôΐ",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1016/üникóδé-дôΐ",
+    "url": "https://doi.org/10.1016/üникóδé-дôΐ"
+  },
+  {
+    "input": "10.1016/སྦ་བཞེད་",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1016/སྦ་བཞེད་",
+    "url": "https://doi.org/10.1016/སྦ་བཞེད་"
+  },
+  {
+    "input": "10.1002/(SICI)1521-3978(199806)46:4/5<493::AID-PROP493>3.0.CO;2-P",
+    "matches": [
+      "doi",
+      "handle"
+    ],
+    "canonical": "10.1002/(sici)1521-3978(199806)46:4/5<493::aid-prop493>3.0.co;2-p",
+    "url": "https://doi.org/10.1002/(sici)1521-3978(199806)46:4/5<493::aid-prop493>3.0.co;2-p"
+  },
+  {
+    "input": "urn:doi:10.1093/annonc/mdz260.023",
+    "matches": [
+      "doi",
+      "handle",
+      "urn"
+    ],
+    "canonical": "10.1093/annonc/mdz260.023",
+    "url": "https://doi.org/10.1093/annonc/mdz260.023"
+  },
+  {
+    "input": "9783468111242",
+    "matches": [
+      "isbn",
+      "ean13"
+    ],
+    "canonical": "978-3-468-11124-2",
+    "url": null
+  },
+  {
+    "input": "9798847781275",
+    "matches": [
+      "isbn",
+      "ean13"
+    ],
+    "canonical": "979-8-8477-8127-5",
+    "url": null
+  },
+  {
+    "input": "9798991050005",
+    "matches": [
+      "isbn",
+      "ean13"
+    ],
+    "canonical": "979-8-9910500-0-5",
+    "url": null
+  },
+  {
+    "input": "9791370064242",
+    "matches": [
+      "isbn",
+      "ean13"
+    ],
+    "canonical": "979-13-7006-424-2",
+    "url": null
+  },
+  {
+    "input": "978-65-87773-12-4",
+    "matches": [
+      "isbn"
+    ],
+    "canonical": null,
+    "url": null
+  },
+  {
+    "input": "4006381333931",
+    "matches": [
+      "ean13"
+    ],
+    "canonical": null,
+    "url": null
+  },
+  {
+    "input": "73513537",
+    "matches": [
+      "ean8"
+    ],
+    "canonical": null,
+    "url": null
+  },
+  {
+    "input": "15626865",
+    "matches": [
+      "issn",
+      "pmid"
+    ],
+    "canonical": "1562-6865",
+    "url": null
+  },
+  {
+    "input": "10013/epic.10033",
+    "matches": [
+      "handle"
+    ],
+    "canonical": "10013/epic.10033",
+    "url": "http://hdl.handle.net/10013/epic.10033"
+  },
+  {
+    "input": "hdl:10013/epic.10033",
+    "matches": [
+      "handle"
+    ],
+    "canonical": "10013/epic.10033",
+    "url": "http://hdl.handle.net/10013/epic.10033"
+  },
+  {
+    "input": "hdl: 10013/epic.10033",
+    "matches": [
+      "handle"
+    ],
+    "canonical": "10013/epic.10033",
+    "url": "http://hdl.handle.net/10013/epic.10033"
+  },
+  {
+    "input": "HDL:10013/epic.10033",
+    "matches": [
+      "handle"
+    ],
+    "canonical": "10013/epic.10033",
+    "url": "http://hdl.handle.net/10013/epic.10033"
+  },
+  {
+    "input": "hdl.handle.net/10013/epic.10033",
+    "matches": [
+      "handle"
+    ],
+    "canonical": "10013/epic.10033",
+    "url": "http://hdl.handle.net/10013/epic.10033"
+  },
+  {
+    "input": "http://hdl.handle.net/10013/epic.10033",
+    "matches": [
+      "handle",
+      "url"
+    ],
+    "canonical": "10013/epic.10033",
+    "url": "http://hdl.handle.net/10013/epic.10033"
+  },
+  {
+    "input": "https://hdl.handle.net/10013/epic.10033",
+    "matches": [
+      "handle",
+      "url"
+    ],
+    "canonical": "10013/epic.10033",
+    "url": "http://hdl.handle.net/10013/epic.10033"
+  },
+  {
+    "input": "978-3-905673-82- 1",
+    "matches": [
+      "isbn"
+    ],
+    "canonical": "978-3-905673-82-1",
+    "url": null
+  },
+  {
+    "input": "978-3-905673-82-1",
+    "matches": [
+      "isbn"
+    ],
+    "canonical": "978-3-905673-82-1",
+    "url": null
+  },
+  {
+    "input": "0-9752298-0-X",
+    "matches": [
+      "isbn"
+    ],
+    "canonical": "978-0-9752298-0-4",
+    "url": null
+  },
+  {
+    "input": "0077-5606",
+    "matches": [
+      "issn"
+    ],
+    "canonical": "0077-5606",
+    "url": null
+  },
+  {
+    "input": "urn:lsid:ubio.org:namebank:11815",
+    "matches": [
+      "lsid",
+      "urn"
+    ],
+    "canonical": null,
+    "url": null
+  },
+  {
+    "input": "0A9 2002 12B4A105 7",
+    "matches": [
+      "istc"
+    ],
+    "canonical": null,
+    "url": null
+  },
+  {
+    "input": "1188-1534",
+    "matches": [
+      "issn"
+    ],
+    "canonical": "1188-1534",
+    "url": null
+  },
+  {
+    "input": "12082125",
+    "matches": [
+      "pmid"
+    ],
+    "canonical": "12082125",
+    "url": "http://pubmed.ncbi.nlm.nih.gov/12082125/"
+  },
+  {
+    "input": "pmid:12082125",
+    "matches": [
+      "pmid"
+    ],
+    "canonical": "12082125",
+    "url": "http://pubmed.ncbi.nlm.nih.gov/12082125/"
+  },
+  {
+    "input": "https://pubmed.ncbi.nlm.nih.gov/12082125",
+    "matches": [
+      "pmid",
+      "url"
+    ],
+    "canonical": "12082125",
+    "url": "http://pubmed.ncbi.nlm.nih.gov/12082125/"
+  },
+  {
+    "input": "https://pubmed.ncbi.nlm.nih.gov/12082125/",
+    "matches": [
+      "pmid",
+      "url"
+    ],
+    "canonical": "12082125",
+    "url": "http://pubmed.ncbi.nlm.nih.gov/12082125/"
+  },
+  {
+    "input": "http://purl.oclc.org/foo/bar",
+    "matches": [
+      "purl",
+      "url"
+    ],
+    "canonical": null,
+    "url": "http://purl.oclc.org/foo/bar"
+  },
+  {
+    "input": "https://purl.fdlp.gov/GPO/gpo154197",
+    "matches": [
+      "purl",
+      "url"
+    ],
+    "canonical": null,
+    "url": "https://purl.fdlp.gov/GPO/gpo154197"
+  },
+  {
+    "input": "http://www.heatflow.und.edu/index2.html",
+    "matches": [
+      "url"
+    ],
+    "canonical": "http://www.heatflow.und.edu/index2.html",
+    "url": "http://www.heatflow.und.edu/index2.html"
+  },
+  {
+    "input": "http://www.heatflow.und.edu/",
+    "matches": [
+      "url"
+    ],
+    "canonical": "http://www.heatflow.und.edu/",
+    "url": "http://www.heatflow.und.edu/"
+  },
+  {
+    "input": "PMC2631623",
+    "matches": [
+      "pmcid"
+    ],
+    "canonical": null,
+    "url": "http://pmc.ncbi.nlm.nih.gov/articles/PMC2631623/"
+  },
+  {
+    "input": "2011ApJS..192...18K",
+    "matches": [
+      "ads"
+    ],
+    "canonical": null,
+    "url": "http://ui.adsabs.harvard.edu/#abs/2011ApJS..192...18K"
+  },
+  {
+    "input": "2016arXiv161002026S",
+    "matches": [
+      "ads"
+    ],
+    "canonical": null,
+    "url": "http://ui.adsabs.harvard.edu/#abs/2016arXiv161002026S"
+  },
+  {
+    "input": "ads:2011ApJS..192...18K",
+    "matches": [
+      "ads"
+    ],
+    "canonical": "2011ApJS..192...18K",
+    "url": "http://ui.adsabs.harvard.edu/#abs/2011ApJS..192...18K"
+  },
+  {
+    "input": "ads:2017zndo....495787v",
+    "matches": [
+      "ads"
+    ],
+    "canonical": "2017zndo....495787v",
+    "url": "http://ui.adsabs.harvard.edu/#abs/2017zndo....495787v"
+  },
+  {
+    "input": "1992ApJ…400L…1W",
+    "matches": [
+      "ads"
+    ],
+    "canonical": "1992ApJ...400L...1W",
+    "url": "http://ui.adsabs.harvard.edu/#abs/1992ApJ...400L...1W"
+  },
+  {
+    "input": "0000000218250097",
+    "matches": [
+      "orcid",
+      "isni"
+    ],
+    "canonical": "0000-0002-1825-0097",
+    "url": "http://orcid.org/0000-0002-1825-0097"
+  },
+  {
+    "input": "http://orcid.org/0000-0002-1825-0097",
+    "matches": [
+      "orcid",
+      "url"
+    ],
+    "canonical": "0000-0002-1825-0097",
+    "url": "http://orcid.org/0000-0002-1825-0097"
+  },
+  {
+    "input": "https://orcid.org/0000-0002-1825-0097",
+    "matches": [
+      "orcid",
+      "url"
+    ],
+    "canonical": "0000-0002-1825-0097",
+    "url": "http://orcid.org/0000-0002-1825-0097"
+  },
+  {
+    "input": "0000-0002-1694-233X",
+    "matches": [
+      "orcid",
+      "isni"
+    ],
+    "canonical": "0000-0002-1694-233X",
+    "url": "http://orcid.org/0000-0002-1694-233X"
+  },
+  {
+    "input": "0009-0005-6000-7479",
+    "matches": [
+      "orcid",
+      "isni"
+    ],
+    "canonical": "0009-0005-6000-7479",
+    "url": "http://orcid.org/0009-0005-6000-7479"
+  },
+  {
+    "input": "https://orcid.org/0009-0002-4767-9017",
+    "matches": [
+      "orcid",
+      "url"
+    ],
+    "canonical": "0009-0002-4767-9017",
+    "url": "http://orcid.org/0009-0002-4767-9017"
+  },
+  {
+    "input": "1422-4586-3573-0476",
+    "matches": [
+      "isni"
+    ],
+    "canonical": "1422458635730476",
+    "url": "https://isni.org/isni/1422458635730476"
+  },
+  {
+    "input": "https://isni.org/isni/1422-4586-3573-0476",
+    "matches": [
+      "isni"
+    ],
+    "canonical": "1422458635730476",
+    "url": "https://isni.org/isni/1422458635730476"
+  },
+  {
+    "input": "arXiv:1310.2590",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:1310.2590",
+    "url": "http://arxiv.org/abs/arXiv:1310.2590"
+  },
+  {
+    "input": "arxiv:1310.2590",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:1310.2590",
+    "url": "http://arxiv.org/abs/arXiv:1310.2590"
+  },
+  {
+    "input": "1310.2590",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:1310.2590",
+    "url": "http://arxiv.org/abs/arXiv:1310.2590"
+  },
+  {
+    "input": "math.GT/0309136",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:math/0309136",
+    "url": "http://arxiv.org/abs/arXiv:math/0309136"
+  },
+  {
+    "input": "hep-th/9901001v27",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:hep-th/9901001v27",
+    "url": "http://arxiv.org/abs/arXiv:hep-th/9901001v27"
+  },
+  {
+    "input": "arxiv:math.GT/0309136v2",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:math/0309136v2",
+    "url": "http://arxiv.org/abs/arXiv:math/0309136v2"
+  },
+  {
+    "input": "arXiv:hep-th/9901001v27",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:hep-th/9901001v27",
+    "url": "http://arxiv.org/abs/arXiv:hep-th/9901001v27"
+  },
+  {
+    "input": "9912.12345v2",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:9912.12345v2",
+    "url": "http://arxiv.org/abs/arXiv:9912.12345v2"
+  },
+  {
+    "input": "arXiv:hep-th/1601.07616",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:1601.07616",
+    "url": "http://arxiv.org/abs/arXiv:1601.07616"
+  },
+  {
+    "input": "hep-th/1601.07616",
+    "matches": [
+      "arxiv"
+    ],
+    "canonical": "arXiv:1601.07616",
+    "url": "http://arxiv.org/abs/arXiv:1601.07616"
+  },
+  {
+    "input": "http://d-nb.info/gnd/1055864695",
+    "matches": [
+      "gnd",
+      "url"
+    ],
+    "canonical": "gnd:1055864695",
+    "url": "http://d-nb.info/gnd/1055864695"
+  },
+  {
+    "input": "GND:4079154-3",
+    "matches": [
+      "gnd"
+    ],
+    "canonical": "gnd:4079154-3",
+    "url": "http://d-nb.info/gnd/4079154-3"
+  },
+  {
+    "input": "4079154-3",
+    "matches": [
+      "gnd"
+    ],
+    "canonical": "gnd:4079154-3",
+    "url": "http://d-nb.info/gnd/4079154-3"
+  },
+  {
+    "input": "SRX3529244",
+    "matches": [
+      "sra"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/ena/data/view/SRX3529244"
+  },
+  {
+    "input": "SRR6437777",
+    "matches": [
+      "sra"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/ena/data/view/SRR6437777"
+  },
+  {
+    "input": "PRJNA224116",
+    "matches": [
+      "bioproject"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/ena/data/view/PRJNA224116"
+  },
+  {
+    "input": "SAMN08289383",
+    "matches": [
+      "biosample"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/ena/data/view/SAMN08289383"
+  },
+  {
+    "input": "ENSG00000012048",
+    "matches": [
+      "ensembl"
+    ],
+    "canonical": null,
+    "url": "http://www.ensembl.org/id/ENSG00000012048"
+  },
+  {
+    "input": "ENSMUST00000017290",
+    "matches": [
+      "ensembl"
+    ],
+    "canonical": null,
+    "url": "http://www.ensembl.org/id/ENSMUST00000017290"
+  },
+  {
+    "input": "ENSG00000012048.15",
+    "matches": [
+      "ensembl"
+    ],
+    "canonical": null,
+    "url": "http://www.ensembl.org/id/ENSG00000012048"
+  },
+  {
+    "input": "P02833",
+    "matches": [
+      "uniprot"
+    ],
+    "canonical": null,
+    "url": "http://purl.uniprot.org/uniprot/P02833"
+  },
+  {
+    "input": "Q9GYV0",
+    "matches": [
+      "uniprot"
+    ],
+    "canonical": null,
+    "url": "http://purl.uniprot.org/uniprot/Q9GYV0"
+  },
+  {
+    "input": "NZ_JXSL01000036.1",
+    "matches": [
+      "refseq"
+    ],
+    "canonical": null,
+    "url": "http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val=NZ_JXSL01000036.1"
+  },
+  {
+    "input": "NM_206454",
+    "matches": [
+      "refseq"
+    ],
+    "canonical": null,
+    "url": "http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val=NM_206454"
+  },
+  {
+    "input": "XM_002113800.1",
+    "matches": [
+      "refseq"
+    ],
+    "canonical": null,
+    "url": "http://www.ncbi.nlm.nih.gov/entrez/viewer.fcgi?val=XM_002113800.1"
+  },
+  {
+    "input": "GCA_000002275.2",
+    "matches": [
+      "genome"
+    ],
+    "canonical": null,
+    "url": "http://www.ncbi.nlm.nih.gov/assembly/GCA_000002275.2"
+  },
+  {
+    "input": "GCF_000001405.38",
+    "matches": [
+      "genome"
+    ],
+    "canonical": null,
+    "url": "http://www.ncbi.nlm.nih.gov/assembly/GCF_000001405.38"
+  },
+  {
+    "input": "GPL9",
+    "matches": [
+      "geo"
+    ],
+    "canonical": null,
+    "url": "http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GPL9"
+  },
+  {
+    "input": "GSM888",
+    "matches": [
+      "geo"
+    ],
+    "canonical": null,
+    "url": "http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM888"
+  },
+  {
+    "input": "GSE55396",
+    "matches": [
+      "geo"
+    ],
+    "canonical": null,
+    "url": "http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE55396"
+  },
+  {
+    "input": "GDS1234",
+    "matches": [
+      "geo"
+    ],
+    "canonical": null,
+    "url": "http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GDS1234"
+  },
+  {
+    "input": "A-MEXP-1171",
+    "matches": [
+      "arrayexpress_array"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/arrayexpress/arrays/A-MEXP-1171"
+  },
+  {
+    "input": "A-AFFY-17",
+    "matches": [
+      "arrayexpress_array"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/arrayexpress/arrays/A-AFFY-17"
+  },
+  {
+    "input": "E-MEXP-1712",
+    "matches": [
+      "arrayexpress_experiment"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/arrayexpress/experiments/E-MEXP-1712"
+  },
+  {
+    "input": "E-MTAB-424",
+    "matches": [
+      "arrayexpress_experiment"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-424"
+  },
+  {
+    "input": "E-MTAB-4020",
+    "matches": [
+      "arrayexpress_experiment"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-4020"
+  },
+  {
+    "input": "E-TABM-14",
+    "matches": [
+      "arrayexpress_experiment"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/arrayexpress/experiments/E-TABM-14"
+  },
+  {
+    "input": "E-FLYC-6",
+    "matches": [
+      "arrayexpress_experiment"
+    ],
+    "canonical": null,
+    "url": "http://www.ebi.ac.uk/arrayexpress/experiments/E-FLYC-6"
+  },
+  {
+    "input": "hal:inserm-13102590",
+    "matches": [
+      "hal"
+    ],
+    "canonical": "inserm-13102590",
+    "url": "http://hal.archives-ouvertes.fr/inserm-13102590"
+  },
+  {
+    "input": "inserm-13102590",
+    "matches": [
+      "hal"
+    ],
+    "canonical": "inserm-13102590",
+    "url": "http://hal.archives-ouvertes.fr/inserm-13102590"
+  },
+  {
+    "input": "mem_13102590",
+    "matches": [
+      "hal"
+    ],
+    "canonical": "mem_13102590",
+    "url": "http://hal.archives-ouvertes.fr/mem_13102590"
+  },
+  {
+    "input": "ascl:1908.011",
+    "matches": [
+      "ascl"
+    ],
+    "canonical": "ascl:1908.011",
+    "url": "http://ascl.net/1908.011"
+  },
+  {
+    "input": "swh:1:cnt:94a9ed024d3859793618152ea559a168bbcbb5e2",
+    "matches": [
+      "swh"
+    ],
+    "canonical": "swh:1:cnt:94a9ed024d3859793618152ea559a168bbcbb5e2",
+    "url": "http://archive.softwareheritage.org/swh:1:cnt:94a9ed024d3859793618152ea559a168bbcbb5e2"
+  },
+  {
+    "input": "swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505",
+    "matches": [
+      "swh"
+    ],
+    "canonical": "swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505",
+    "url": "http://archive.softwareheritage.org/swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505"
+  },
+  {
+    "input": "swh:1:rev:309cf2674ee7a0749978cf8265ab91a60aea0f7d",
+    "matches": [
+      "swh"
+    ],
+    "canonical": "swh:1:rev:309cf2674ee7a0749978cf8265ab91a60aea0f7d",
+    "url": "http://archive.softwareheritage.org/swh:1:rev:309cf2674ee7a0749978cf8265ab91a60aea0f7d"
+  },
+  {
+    "input": "swh:1:rel:22ece559cc7cc2364edc5e5593d63ae8bd229f9f",
+    "matches": [
+      "swh"
+    ],
+    "canonical": "swh:1:rel:22ece559cc7cc2364edc5e5593d63ae8bd229f9f",
+    "url": "http://archive.softwareheritage.org/swh:1:rel:22ece559cc7cc2364edc5e5593d63ae8bd229f9f"
+  },
+  {
+    "input": "swh:1:snp:c7c108084bc0bf3d81436bf980b46e98bd338453",
+    "matches": [
+      "swh"
+    ],
+    "canonical": "swh:1:snp:c7c108084bc0bf3d81436bf980b46e98bd338453",
+    "url": "http://archive.softwareheritage.org/swh:1:snp:c7c108084bc0bf3d81436bf980b46e98bd338453"
+  },
+  {
+    "input": "swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505;origin=https://github.com/user/repo",
+    "matches": [
+      "swh"
+    ],
+    "canonical": "swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505;origin=https://github.com/user/repo",
+    "url": "http://archive.softwareheritage.org/swh:1:dir:d198bc9d7a6bcf6db04f476d29314f157507d505;origin=https://github.com/user/repo"
+  },
+  {
+    "input": "03yrm5c26",
+    "matches": [
+      "ror"
+    ],
+    "canonical": "03yrm5c26",
+    "url": "http://ror.org/03yrm5c26"
+  },
+  {
+    "input": "http://ror.org/03yrm5c26",
+    "matches": [
+      "ror",
+      "url"
+    ],
+    "canonical": "03yrm5c26",
+    "url": "http://ror.org/03yrm5c26"
+  },
+  {
+    "input": "https://viaf.org/viaf/75121530",
+    "matches": [
+      "viaf"
+    ],
+    "canonical": "viaf:75121530",
+    "url": "https://viaf.org/viaf/75121530"
+  },
+  {
+    "input": "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562;origin=https://github.com/python/cpython;visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b;anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977;path=/Programs/python.c;lines=12-16",
+    "matches": [
+      "swh"
+    ],
+    "canonical": "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562;origin=https://github.com/python/cpython;visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b;anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977;path=/Programs/python.c;lines=12-16",
+    "url": "http://archive.softwareheritage.org/swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562;origin=https://github.com/python/cpython;visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b;anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977;path=/Programs/python.c;lines=12-16"
+  },
+  {
+    "input": "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562;anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977;visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b;path=/Programs/python.c;lines=12-16;origin=https://github.com/python/cpython",
+    "matches": [
+      "swh"
+    ],
+    "canonical": "swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562;anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977;visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b;path=/Programs/python.c;lines=12-16;origin=https://github.com/python/cpython",
+    "url": "http://archive.softwareheritage.org/swh:1:cnt:78e48f800c950530e36d3712d9e2e89673f23562;anchor=swh:1:rel:ae1f6af15f3e4110616801e235873e47fd7d1977;visit=swh:1:snp:cd510e99a42139ed36f15a5774301c113c3e494b;path=/Programs/python.c;lines=12-16;origin=https://github.com/python/cpython"
+  },
+  {
+    "input": "wikidata:Q303",
+    "matches": [
+      "wikidata"
+    ],
+    "canonical": "Q303",
+    "url": "https://www.wikidata.org/entity/Q303"
+  },
+  {
+    "input": "custom_scheme_valid",
+    "matches": [
+      "custom_scheme"
+    ],
+    "canonical": "custom_scheme_valid",
+    "url": "http://custom/scheme/custom_scheme_valid"
+  },
+  {
+    "input": "user1@example.com",
+    "matches": [
+      "email"
+    ],
+    "canonical": "user1@example.com",
+    "url": null
+  },
+  {
+    "input": "5b5056cbf89049064b44d5101764aaae42eb1447",
+    "matches": [
+      "sha1"
+    ],
+    "canonical": "5b5056cbf89049064b44d5101764aaae42eb1447",
+    "url": null
+  },
+  {
+    "input": "W2741809807",
+    "matches": [
+      "openalex"
+    ],
+    "canonical": "W2741809807",
+    "url": "https://openalex.org/W2741809807"
+  },
+  {
+    "input": "A5010416163",
+    "matches": [
+      "openalex"
+    ],
+    "canonical": "A5010416163",
+    "url": "https://openalex.org/A5010416163"
+  },
+  {
+    "input": "31253.11.sciencedb.13238",
+    "matches": [
+      "cstr"
+    ],
+    "canonical": "31253.11.sciencedb.13238",
+    "url": null
+  },
+  {
+    "input": "RRID:SCR_014641",
+    "matches": [
+      "rrid"
+    ],
+    "canonical": "RRID:SCR_014641",
+    "url": "http://scicrunch.org/resolver/RRID:SCR_014641"
+  },
+  {
+    "input": "https://raid.org/10.83962/fb5be317",
+    "matches": [
+      "raid",
+      "url"
+    ],
+    "canonical": "10.83962/fb5be317",
+    "url": "https://raid.org/10.83962/fb5be317"
+  },
+  {
+    "input": "https://raid.org/10.83962/f2a7645d",
+    "matches": [
+      "raid",
+      "url"
+    ],
+    "canonical": "10.83962/f2a7645d",
+    "url": "https://raid.org/10.83962/f2a7645d"
+  }
+]
