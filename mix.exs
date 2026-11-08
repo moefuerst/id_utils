@@ -102,7 +102,7 @@ defmodule IDUtils.MixProject do
   defp package do
     [
       name: :id_utils,
-      files: ~w(lib .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
+      files: ~w(lib priv .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
       licenses: ["BSD-3-Clause"],
       maintainers: ["Moritz F. Fürst"],
       source_url: @source_url,
