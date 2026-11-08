@@ -1,0 +1,167 @@
+// generated and validated with python-stdnum 2.2 (stdnum.isbn, stdnum.issn)
+[
+  {
+    "input": "000000000",
+    "expected": "0"
+  },
+  {
+    "input": "999999999",
+    "expected": "9"
+  },
+  {
+    "input": "030640615",
+    "expected": "2"
+  },
+  {
+    "input": "080442957",
+    "expected": "X"
+  },
+  {
+    "input": "549141653",
+    "expected": "3"
+  },
+  {
+    "input": "462531915",
+    "expected": "3"
+  },
+  {
+    "input": "268956990",
+    "expected": "6"
+  },
+  {
+    "input": "168277524",
+    "expected": "0"
+  },
+  {
+    "input": "175354650",
+    "expected": "8"
+  },
+  {
+    "input": "298626368",
+    "expected": "2"
+  },
+  {
+    "input": "914207363",
+    "expected": "4"
+  },
+  {
+    "input": "703009125",
+    "expected": "6"
+  },
+  {
+    "input": "486783963",
+    "expected": "9"
+  },
+  {
+    "input": "640962448",
+    "expected": "4"
+  },
+  {
+    "input": "416881035",
+    "expected": "6"
+  },
+  {
+    "input": "768971329",
+    "expected": "7"
+  },
+  {
+    "input": "317999215",
+    "expected": "8"
+  },
+  {
+    "input": "998102635",
+    "expected": "2"
+  },
+  {
+    "input": "444192738",
+    "expected": "X"
+  },
+  {
+    "input": "589912334",
+    "expected": "6"
+  },
+  {
+    "input": "323936462",
+    "expected": "X"
+  },
+  {
+    "input": "0000000",
+    "expected": "0"
+  },
+  {
+    "input": "9999999",
+    "expected": "4"
+  },
+  {
+    "input": "0378595",
+    "expected": "5"
+  },
+  {
+    "input": "2434561",
+    "expected": "X"
+  },
+  {
+    "input": "1951279",
+    "expected": "1"
+  },
+  {
+    "input": "1482994",
+    "expected": "0"
+  },
+  {
+    "input": "3603737",
+    "expected": "0"
+  },
+  {
+    "input": "1332283",
+    "expected": "4"
+  },
+  {
+    "input": "1250222",
+    "expected": "7"
+  },
+  {
+    "input": "2384813",
+    "expected": "8"
+  },
+  {
+    "input": "9899295",
+    "expected": "3"
+  },
+  {
+    "input": "3394844",
+    "expected": "5"
+  },
+  {
+    "input": "9202774",
+    "expected": "1"
+  },
+  {
+    "input": "1144931",
+    "expected": "4"
+  },
+  {
+    "input": "1358605",
+    "expected": "X"
+  },
+  {
+    "input": "1526174",
+    "expected": "3"
+  },
+  {
+    "input": "7496641",
+    "expected": "3"
+  },
+  {
+    "input": "2639321",
+    "expected": "2"
+  },
+  {
+    "input": "2923972",
+    "expected": "9"
+  },
+  {
+    "input": "6446632",
+    "expected": "9"
+  }
+]
