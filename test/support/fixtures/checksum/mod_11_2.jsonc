@@ -1,0 +1,123 @@
+// generated and validated with python-stdnum 2.2, (stdnum.iso7064.mod_11_2)
+[
+  {
+    "input": "0",
+    "expected": "1"
+  },
+  {
+    "input": "00",
+    "expected": "1"
+  },
+  {
+    "input": "1",
+    "expected": "X"
+  },
+  {
+    "input": "000000000000000",
+    "expected": "1"
+  },
+  {
+    "input": "999999999999999",
+    "expected": "4"
+  },
+  {
+    "input": "000000021825009",
+    "expected": "7"
+  },
+  {
+    "input": "000000029079593",
+    "expected": "X"
+  },
+  {
+    "input": "32452256",
+    "expected": "X"
+  },
+  {
+    "input": "51075534484",
+    "expected": "9"
+  },
+  {
+    "input": "77115691505374343920571144",
+    "expected": "X"
+  },
+  {
+    "input": "32874201990798321813739936380",
+    "expected": "6"
+  },
+  {
+    "input": "274937487135749",
+    "expected": "X"
+  },
+  {
+    "input": "436523605483703",
+    "expected": "3"
+  },
+  {
+    "input": "983031670356033",
+    "expected": "X"
+  },
+  {
+    "input": "926769683888198",
+    "expected": "X"
+  },
+  {
+    "input": "804988620959168",
+    "expected": "3"
+  },
+  {
+    "input": "185266832260421",
+    "expected": "2"
+  },
+  {
+    "input": "504792845615852",
+    "expected": "6"
+  },
+  {
+    "input": "809841615709486",
+    "expected": "1"
+  },
+  {
+    "input": "466879507766281",
+    "expected": "8"
+  },
+  {
+    "input": "430413621993240",
+    "expected": "X"
+  },
+  {
+    "input": "285852467164967",
+    "expected": "7"
+  },
+  {
+    "input": "462874280247813",
+    "expected": "3"
+  },
+  {
+    "input": "915218492129290",
+    "expected": "9"
+  },
+  {
+    "input": "666947239929499",
+    "expected": "2"
+  },
+  {
+    "input": "539425541803259",
+    "expected": "1"
+  },
+  {
+    "input": "296358176799285",
+    "expected": "6"
+  },
+  {
+    "input": "540299140829127",
+    "expected": "8"
+  },
+  {
+    "input": "873993474243215",
+    "expected": "3"
+  },
+  {
+    "input": "817249100489726",
+    "expected": "X"
+  }
+]
