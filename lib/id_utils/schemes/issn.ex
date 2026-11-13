@@ -19,6 +19,9 @@ defmodule IDUtils.Schemes.ISSN do
       iex> IDUtils.Schemes.ISSN.match?("2049-3630")
       true
 
+      iex> IDUtils.Schemes.ISSN.match?("20493630")
+      true
+
       iex> IDUtils.Schemes.ISSN.match?("1234-567X")
       false
   """
@@ -57,35 +60,45 @@ defmodule IDUtils.Schemes.ISSN do
 
   # Private helpers
 
-  defguardp is_decimal_group(a, b, c, d)
+  defguardp is_ngroup(a, b, c, d)
             when a in ?0..?9 and b in ?0..?9 and c in ?0..?9 and d in ?0..?9
 
-  defp format(<<a::binary-size(4), b::binary-size(4)>>) do
-    a <> "-" <> b
-  end
+  # discarded in normalization
+  defguardp is_separator(c)
+            when c in [?-, ?\s]
 
   defp parse(string, acc \\ <<>>)
 
-  # 8 characters: 7 digits plus check digit.
-  defp parse(<<a, b, c, d, rest::binary>>, acc) when byte_size(acc) <= 4 and is_decimal_group(a, b, c, d) do
-    parse(rest, <<acc::binary, a, b, c, d>>)
-  end
-
-  defp parse(<<digit, rest::binary>>, acc) when byte_size(acc) < 8 and digit in ?0..?9 do
-    parse(rest, <<acc::binary, digit>>)
-  end
-
-  defp parse(<<check, rest::binary>>, acc) when byte_size(acc) == 7 and check in [?X, ?x] do
-    parse(rest, <<acc::binary, ?X>>)
-  end
-
-  defp parse(<<separator, rest::binary>>, acc) when separator in [?-, ?\s] do
-    parse(rest, acc)
-  end
-
+  # 8 characters: 7 digits plus check digit
   defp parse(<<>>, acc) when byte_size(acc) == 8 do
     {:ok, acc}
   end
 
-  defp parse(_, _), do: :error
+  # a separator is only allowed between the two groups of four digits
+  defp parse(<<separator, rest::binary>>, acc) when byte_size(acc) == 4 and is_separator(separator) do
+    chars(rest, acc)
+  end
+
+  defp parse(rest, acc) do
+    chars(rest, acc)
+  end
+
+  # at most 4 accumulated bytes leave room for a four-byte group of digits
+  defp chars(<<a, b, c, d, rest::binary>>, acc) when byte_size(acc) <= 4 and is_ngroup(a, b, c, d) do
+    parse(rest, <<acc::binary, a, b, c, d>>)
+  end
+
+  defp chars(<<digit, rest::binary>>, acc) when byte_size(acc) < 8 and digit in ?0..?9 do
+    parse(rest, <<acc::binary, digit>>)
+  end
+
+  defp chars(<<check, rest::binary>>, acc) when byte_size(acc) == 7 and check in [?X, ?x] do
+    parse(rest, <<acc::binary, ?X>>)
+  end
+
+  defp chars(_, _), do: :error
+
+  defp format(<<a::binary-size(4), b::binary-size(4)>>) do
+    a <> "-" <> b
+  end
 end
