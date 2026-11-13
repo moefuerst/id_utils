@@ -3,6 +3,21 @@ defmodule IDUtils.Schemes.DOI do
   DOI (Digital Object Identifier) scheme.
 
   See https://doi.org/10.1000/182
+
+  > #### DOI Prefix {: .info}
+  >
+  > The 2022 edition of ISO 26324 "Information and documentation — Digital object identifier
+  > system" removed the previous requirement for the directory indicator to be "10" from the
+  > prefix syntax, and also allows DOI names without a registrant code. In theory, that would
+  > allow for DOIs like `15434/foo-bar`. Furthermore, there is no formal restriction in the
+  > ISO-standard that the registrant code must be numeric
+  > [(see)](https://iana.org/assignments/urn-namespaces/urn-formal/doi).
+  >
+  > However, there is currently no indication that the DOI Foundation has actually allocated such
+  > a prefix, and the current DOI Handbook describes the namespace as beginning with "10". This
+  > module follows common practical conventions and only matches DOIs starting with the directory
+  > indicator "10" and a registrant code that consists only of one or more digits (allowing for
+  > registrant code subdivisions with a `.`).
   """
 
   @behaviour IDUtils.Scheme
@@ -38,14 +53,14 @@ defmodule IDUtils.Schemes.DOI do
 
   ## Examples
 
-      iex> IDUtils.Schemes.DOI.normalize("10.1234/abc123")
-      {:ok, "10.1234/abc123"}
-
       iex> IDUtils.Schemes.DOI.normalize("https://doi.org/10.1000.10/foo-bar")
       {:ok, "10.1000.10/foo-bar"}
 
       iex> IDUtils.Schemes.DOI.normalize("doi: 10.1234/foo")
       {:ok, "10.1234/foo"}
+
+      iex> IDUtils.Schemes.DOI.normalize("10.1234/abc123")
+      {:ok, "10.1234/abc123"}
 
       iex> IDUtils.Schemes.DOI.normalize("not-a-doi")
       {:error, :invalid_identifier}
