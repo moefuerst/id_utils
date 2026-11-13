@@ -96,6 +96,13 @@ defmodule IDUtils.Schemes.ISNI do
 
   # Private helpers
 
+  defguardp is_ngroup(a, b, c, d)
+            when a in ?0..?9 and b in ?0..?9 and c in ?0..?9 and d in ?0..?9
+
+  # discarded in normalization
+  defguardp is_separator(c)
+            when c in [?-, ?\s]
+
   defp strip_prefix("https://isni.org/isni/" <> rest), do: rest
   defp strip_prefix("https://isni.org/" <> rest), do: rest
   defp strip_prefix("http://www.isni.org/isni/" <> rest), do: rest
@@ -115,21 +122,32 @@ defmodule IDUtils.Schemes.ISNI do
     end
   end
 
-  defp isni(<<digit, rest::binary>>, acc) when byte_size(acc) < 16 and digit in ?0..?9 do
-    isni(rest, <<acc::binary, digit>>)
-  end
-
-  defp isni(<<check, rest::binary>>, acc) when byte_size(acc) == 15 and check in [?X, ?x] do
-    isni(rest, <<acc::binary, ?X>>)
-  end
-
-  defp isni(<<separator, rest::binary>>, acc) when separator in [?-, ?\s] do
-    isni(rest, acc)
-  end
-
+  # 16 characters: 15 digits plus check digit
   defp isni(<<>>, acc) when byte_size(acc) == 16 do
     {:ok, acc}
   end
 
-  defp isni(_, _), do: :error
+  # separators are only allowed between groups of four digits
+  defp isni(<<separator, rest::binary>>, acc) when byte_size(acc) in [4, 8, 12] and is_separator(separator) do
+    chars(rest, acc)
+  end
+
+  defp isni(rest, acc) do
+    chars(rest, acc)
+  end
+
+  # at most 12 accumulated bytes leave room for a four-byte group of digits
+  defp chars(<<a, b, c, d, rest::binary>>, acc) when byte_size(acc) <= 12 and is_ngroup(a, b, c, d) do
+    isni(rest, <<acc::binary, a, b, c, d>>)
+  end
+
+  defp chars(<<digit, rest::binary>>, acc) when byte_size(acc) < 16 and digit in ?0..?9 do
+    isni(rest, <<acc::binary, digit>>)
+  end
+
+  defp chars(<<check, rest::binary>>, acc) when byte_size(acc) == 15 and check in [?X, ?x] do
+    isni(rest, <<acc::binary, ?X>>)
+  end
+
+  defp chars(_, _), do: :error
 end
