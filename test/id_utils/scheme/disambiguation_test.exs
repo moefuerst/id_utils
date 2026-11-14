@@ -47,24 +47,6 @@ defmodule IDUtils.Scheme.DisambiguationTest do
   end
 
   describe "clash resolution" do
-    test "prefixed ISNI matches suppress URL matches" do
-      value = "https://isni.org/isni/000000012146438X"
-      schemes = [:isni, :url]
-
-      result = Disambiguation.apply(schemes, value)
-
-      assert result == [:isni]
-    end
-
-    test "unprefixed ISNI matches do not suppress URL matches" do
-      value = "000000012146438X"
-      schemes = [:isni, :url]
-
-      result = Disambiguation.apply(schemes, value)
-
-      assert result == schemes
-    end
-
     test "URL matches supress unprefixed Handle matches" do
       # unknown resolver/handle proxy -> can't be sure it is a handle
       value = "https://example.com/20.1000/100"

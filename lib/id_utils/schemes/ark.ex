@@ -11,8 +11,6 @@ defmodule IDUtils.Schemes.ARK do
 
   @label "ark:"
 
-  @betanumeric ~c"bcdfghjkmnpqrstvwxz0123456789"
-
   # Public API
 
   @doc """
@@ -91,6 +89,10 @@ defmodule IDUtils.Schemes.ARK do
       {:ok, %URI{scheme: "https", host: "gallica.bnf.fr", path: "/ark:/12148/btv1b8449691v/f29", port: 443}}
   """
   @impl IDUtils.Scheme
+  def build_uri(@label <> _rest = ark) do
+    URI.new(@resolver <> ark)
+  end
+
   def build_uri(ark) when is_binary(ark) do
     case URI.new(ark) do
       {:ok,
@@ -104,15 +106,13 @@ defmodule IDUtils.Schemes.ARK do
         {:ok, uri}
 
       _ ->
-        URI.new(@resolver <> ark)
+        {:error, :invalid_identifier}
     end
   end
 
   # Private helpers
 
   defguardp is_ark_label(a, r, k) when a in [?a, ?A] and r in [?r, ?R] and k in [?k, ?K]
-
-  defguardp is_betanumeric(c) when c in @betanumeric
 
   defguardp is_valid_byte(c)
             when c in ?a..?z or c in ?A..?Z or c in ?0..?9 or
@@ -158,11 +158,13 @@ defmodule IDUtils.Schemes.ARK do
   defp ark(<<?/, rest::binary>>, mode), do: naan(rest, <<>>, mode)
   defp ark(rest, mode), do: naan(rest, <<>>, mode)
 
-  defp naan(<<c, rest::binary>>, acc, mode) when is_betanumeric(c) do
+  # while per spec the naan's char repertoire is betanumeric and "implementations must support a
+  # minimum naan length of 16 octets", in practice any assigned naan is currently five digits,
+  # other patterns are "reserved, subject to future definition", see the ietf draft, section 2.3
+  defp naan(<<c, rest::binary>>, acc, mode) when c in ?0..?9 do
     naan(rest, <<acc::binary, c>>, mode)
   end
 
-  # naan is five digits, other patterns are "reserved, subject to future definition"
   defp naan(<<?/, rest::binary>>, acc, mode) when byte_size(acc) == 5 do
     tail(rest, acc, <<>>, nil, mode)
   end
@@ -210,6 +212,7 @@ defmodule IDUtils.Schemes.ARK do
   defp flush(acc, nil), do: acc
   defp flush(acc, sep), do: <<acc::binary, sep>>
 
+  @compile {:inline, upper: 1}
   defp upper(c) when c in ?a..?f, do: c - 32
   defp upper(c), do: c
 end

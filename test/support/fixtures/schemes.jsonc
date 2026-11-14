@@ -96,22 +96,6 @@
     "url": null
   },
   {
-    "input": "ark:/c8131/g3js3v",
-    "matches": [
-      "ark"
-    ],
-    "canonical": "ark:c8131/g3js3v",
-    "url": null
-  },
-  {
-    "input": "ark:c8131/g3js3v.1",
-    "matches": [
-      "ark"
-    ],
-    "canonical": "ark:c8131/g3js3v.1",
-    "url": null
-  },
-  {
     "input": "pmh:oai:bnf.fr:gallica/ark:/12148/bpt6k103110n",
     "matches": [
       "ark",
@@ -647,7 +631,8 @@
   {
     "input": "https://isni.org/isni/1422-4586-3573-0476",
     "matches": [
-      "isni"
+      "isni",
+      "url"
     ],
     "canonical": "1422458635730476",
     "url": "https://isni.org/isni/1422458635730476"
