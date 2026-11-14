@@ -20,7 +20,7 @@ defmodule IDUtils.Schemes.URL do
   # Callbacks
 
   @doc """
-  Check whether a string is a URL.
+  Checks whether a string is a URL.
 
   ## Examples
 
@@ -78,7 +78,7 @@ defmodule IDUtils.Schemes.URL do
 
   defp parse(string) do
     case URI.new(string) do
-      {:ok, %URI{host: nil}} -> {:error, :invalid_identifier}
+      {:ok, %URI{host: host}} when host in [nil, ""] -> {:error, :invalid_identifier}
       {:ok, %URI{scheme: nil}} -> {:error, :invalid_identifier}
       {:ok, %URI{} = uri} -> {:ok, uri}
       _ -> {:error, :invalid_identifier}

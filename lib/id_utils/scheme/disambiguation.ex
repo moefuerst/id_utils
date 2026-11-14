@@ -18,8 +18,14 @@ defmodule IDUtils.Scheme.Disambiguation do
       {:handle, &__MODULE__.no_handle_prefix?/1}
     ],
     isni: [
-      {:url, &ISNI.prefix?/1},
+      :gnd,
       {:handle, &ISNI.prefix?/1}
+    ],
+    orcid: [
+      :gnd
+    ],
+    issn: [
+      :gnd
     ],
     ark: [
       :handle

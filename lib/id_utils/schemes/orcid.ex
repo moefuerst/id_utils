@@ -3,11 +3,19 @@ defmodule IDUtils.Schemes.ORCID do
   ORCID (Open Researcher and Contributor ID) scheme.
 
   See https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier
+
+  > #### ORCID and ISNI {: .info}
+  > ORCID’s format is compatible with ISO 27729 that standardises ISNI. ORCID, Inc., the governing
+  > nonprofit, is an accredited ISNI Registration Agency, and two reserved numeric blocks within
+  > the ISNI range are dedicated to ORCID-issued identifiers. ORCIDs are frequently matched into
+  > corresponding ISNI records, however, there is no guarantee
+  > [(see)](https://casrai.org/guides/isni-identifier-explained-vs-orcid).
   """
 
   @behaviour IDUtils.Scheme
 
   alias IDUtils.Checksum
+  alias IDUtils.Schemes.ISNI
 
   @resolver "https://orcid.org/"
 
@@ -91,47 +99,16 @@ defmodule IDUtils.Schemes.ORCID do
   defguardp is_orcid_label(o, r, c, i, d)
             when o in [?o, ?O] and r in [?r, ?R] and c in [?c, ?C] and i in [?i, ?I] and d in [?d, ?D]
 
-  defguardp is_ngroup(a, b, c, d)
-            when a in ?0..?9 and b in ?0..?9 and c in ?0..?9 and d in ?0..?9
+  defp parse(@resolver <> rest), do: orcid(rest)
+  defp parse("http://orcid.org/" <> rest), do: orcid(rest)
+  defp parse("orcid.org/" <> rest), do: orcid(rest)
+  defp parse(<<o, r, c, i, d, ":", ?\s, rest::binary>>) when is_orcid_label(o, r, c, i, d), do: orcid(rest)
+  defp parse(<<o, r, c, i, d, ":", rest::binary>>) when is_orcid_label(o, r, c, i, d), do: orcid(rest)
+  defp parse(string), do: orcid(string)
 
-  # discarded in normalization
-  defguardp is_separator(c)
-            when c in [?-, ?\s]
-
-  defp parse(@resolver <> rest), do: orcid(rest, <<>>)
-  defp parse("http://orcid.org/" <> rest), do: orcid(rest, <<>>)
-  defp parse("orcid.org/" <> rest), do: orcid(rest, <<>>)
-  defp parse(<<o, r, c, i, d, ":", rest::binary>>) when is_orcid_label(o, r, c, i, d), do: orcid(rest, <<>>)
-  defp parse(string), do: orcid(string, <<>>)
-
-  # 16 characters: 15 digits plus check digit
-  defp orcid(<<>>, acc) when byte_size(acc) == 16 do
-    {:ok, acc}
-  end
-
-  # separators are only allowed between groups of four digits
-  defp orcid(<<separator, rest::binary>>, acc) when byte_size(acc) in [4, 8, 12] and is_separator(separator) do
-    chars(rest, acc)
-  end
-
-  defp orcid(rest, acc) do
-    chars(rest, acc)
-  end
-
-  # at most 12 accumulated bytes leave room for a four-byte group of digits
-  defp chars(<<a, b, c, d, rest::binary>>, acc) when byte_size(acc) <= 12 and is_ngroup(a, b, c, d) do
-    orcid(rest, <<acc::binary, a, b, c, d>>)
-  end
-
-  defp chars(<<digit, rest::binary>>, acc) when byte_size(acc) < 16 and digit in ?0..?9 do
-    orcid(rest, <<acc::binary, digit>>)
-  end
-
-  defp chars(<<check, rest::binary>>, acc) when byte_size(acc) == 15 and check in [?X, ?x] do
-    orcid(rest, <<acc::binary, ?X>>)
-  end
-
-  defp chars(_, _), do: :error
+  # ORCID’s format is ISO 27729 compatible
+  @spec orcid(binary()) :: {:ok, binary()} | :error
+  def orcid(string), do: ISNI.parse_digits(string)
 
   defp in_valid_block?(base) do
     number = String.to_integer(base)

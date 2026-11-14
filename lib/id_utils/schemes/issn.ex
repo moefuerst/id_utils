@@ -75,7 +75,7 @@ defmodule IDUtils.Schemes.ISSN do
   end
 
   # a separator is only allowed between the two groups of four digits
-  defp parse(<<separator, rest::binary>>, acc) when byte_size(acc) == 4 and is_separator(separator) do
+  defp parse(<<sep, rest::binary>>, acc) when byte_size(acc) == 4 and is_separator(sep) do
     chars(rest, acc)
   end
 

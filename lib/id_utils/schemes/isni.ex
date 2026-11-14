@@ -94,6 +94,12 @@ defmodule IDUtils.Schemes.ISNI do
     URI.new(@resolver <> isni)
   end
 
+  # Internal API
+
+  @doc false
+  @spec parse_digits(binary()) :: {:ok, binary()} | :error
+  def parse_digits(string), do: isni(string, <<>>)
+
   # Private helpers
 
   defguardp is_ngroup(a, b, c, d)
@@ -109,8 +115,12 @@ defmodule IDUtils.Schemes.ISNI do
   defp strip_prefix("http://isni.org/isni/" <> rest), do: rest
   defp strip_prefix("isni.org/isni/" <> rest), do: rest
   defp strip_prefix("isni.org/" <> rest), do: rest
+  defp strip_prefix("isni: " <> rest), do: rest
   defp strip_prefix("isni:" <> rest), do: rest
+  defp strip_prefix("ISN:" <> rest), do: rest
   defp strip_prefix("ISNI|" <> rest), do: rest
+  defp strip_prefix("ISNI: " <> rest), do: rest
+  defp strip_prefix("ISNI:" <> rest), do: rest
   defp strip_prefix("ISNI " <> rest), do: rest
   defp strip_prefix("(isni)" <> rest), do: rest
   defp strip_prefix(_other), do: :error
@@ -128,7 +138,7 @@ defmodule IDUtils.Schemes.ISNI do
   end
 
   # separators are only allowed between groups of four digits
-  defp isni(<<separator, rest::binary>>, acc) when byte_size(acc) in [4, 8, 12] and is_separator(separator) do
+  defp isni(<<sep, rest::binary>>, acc) when byte_size(acc) in [4, 8, 12] and is_separator(sep) do
     chars(rest, acc)
   end
 

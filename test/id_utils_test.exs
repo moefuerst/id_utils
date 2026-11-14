@@ -5,15 +5,28 @@ defmodule IDUtilsTest do
     scheme_cases: ["schemes.jsonc"]
   }
 
+  doctest IDUtils
+
   describe "detect_schemes/2" do
     test "agrees with fixtures on all valid vectors" do
       for vector <- cases() do
         input = input(vector)
         expected = expected_schemes(vector)
 
-        {:ok, result} = IDUtils.detect_schemes(input)
+        result = IDUtils.detect_schemes(input)
 
         assert result == expected
+      end
+    end
+  end
+
+  describe "match?/3" do
+    test "agrees with fixtures on all valid vectors" do
+      for vector <- cases() do
+        scheme = expected_best_match(vector)
+        input = input(vector)
+
+        assert IDUtils.match?(input, scheme)
       end
     end
   end

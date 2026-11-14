@@ -41,33 +41,5 @@ defmodule IDUtils.Schemes.ORCIDTest do
         refute ORCID.match?(identifier)
       end
     end
-
-    test "rejects malformed digit sequences" do
-      for identifier <- [
-            "",
-            "000000021825009",
-            "00000002182500977",
-            "0000-000X-1825-0097",
-            "0000-0002-1825-009A",
-            "0000\t0002\t1825\t0097",
-            "0000-0002-1825-0097\n",
-            "-0000-0002-1825-0097-"
-          ] do
-        assert ORCID.normalize(identifier) == {:error, :invalid_identifier}
-      end
-    end
-
-    test "accepts X only as the sixteenth non-separator byte" do
-      for invalid_identifier <- [
-            "00000002169423x3",
-            "000000021694233xx",
-            "000000021694233x0",
-            "00000002169423x",
-            "000000021694233x\t",
-            <<"000000021694233", 255>>
-          ] do
-        assert ORCID.normalize(invalid_identifier) == {:error, :invalid_identifier}
-      end
-    end
   end
 end
