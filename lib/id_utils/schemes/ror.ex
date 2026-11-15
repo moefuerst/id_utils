@@ -102,8 +102,7 @@ defmodule IDUtils.Schemes.ROR do
   # id pattern: leading zero, 6 chars in the crockford base32 alphabet, 2 check digits
   defp ror(<<?0, a, b, c, d, e, f, x, y>> = id) when is_base(a, b, c, d, e, f) and is_check(x, y) do
     # six base32 digits are 5 bits each, pack them into a single 30-bit integer
-    <<n::30>> =
-      <<d(a)::5, d(b)::5, d(c)::5, d(d)::5, d(e)::5, d(f)::5>>
+    <<n::30>> = <<d(a)::5, d(b)::5, d(c)::5, d(d)::5, d(e)::5, d(f)::5>>
 
     {:ok, {id, <<x, y>>, Integer.to_string(n)}}
   end
