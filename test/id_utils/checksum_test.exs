@@ -6,38 +6,38 @@ defmodule IDUtils.ChecksumTest do
 
   @fixtures %{
     mod_11_2: ["checksum", "mod_11_2.jsonc"],
-    mod_11_weighted: ["checksum", "mod_11_weighted.jsonc"]
+    mod_11_weighted: ["checksum", "mod_11_weighted.jsonc"],
+    mod_97_10: ["checksum", "mod_97_10.jsonc"]
   }
 
-  @mod_11_valid_input ?0..?9
-  @mod_11_check_char_set_regex ~r/\A[0-9X]\z/
+  @decimal_digits ?0..?9
 
   doctest Checksum
 
   describe "mod_11_02/1" do
-    test "known vectors" do
+    test "known vectors (ORCID)" do
       assert Checksum.mod_11_2("000000021825009") == "7"
       assert Checksum.mod_11_2("000000029079593") == "X"
     end
 
-    property "returns exactly one char in 0-9 or X" do
-      check all(s <- string(@mod_11_valid_input, min_length: 1, max_length: 40)) do
-        assert Checksum.mod_11_2(s) =~ @mod_11_check_char_set_regex
-      end
-    end
-
     property "input <> check character always validates (full sum ≡ 2 mod 11)" do
-      check all(s <- string(@mod_11_valid_input, min_length: 1, max_length: 40)) do
+      check all(s <- string(@decimal_digits, min_length: 1, max_length: 40)) do
         assert valid_mod_11_2?(s <> Checksum.mod_11_2(s))
       end
     end
 
     property "prepending zeros does not change the check character" do
       check all(
-              s <- string(@mod_11_valid_input, min_length: 1, max_length: 30),
+              s <- string(@decimal_digits, min_length: 1, max_length: 30),
               zeros <- integer(1..5)
             ) do
         assert Checksum.mod_11_2(String.duplicate("0", zeros) <> s) == Checksum.mod_11_2(s)
+      end
+    end
+
+    property "any non-digit byte anywhere raises" do
+      check all(input <- invalid_input()) do
+        assert_raise FunctionClauseError, fn -> Checksum.mod_11_2(input) end
       end
     end
 
@@ -62,20 +62,14 @@ defmodule IDUtils.ChecksumTest do
       assert Checksum.mod_11_weighted("080442957") == "X"
     end
 
-    property "returns exactly one char in 0-9 or X" do
-      check all(s <- string(@mod_11_valid_input, min_length: 1, max_length: 40)) do
-        assert Checksum.mod_11_weighted(s) =~ @mod_11_check_char_set_regex
-      end
-    end
-
     property "input <> check character always validates (weighted sum ≡ 0 mod 11)" do
-      check all(s <- string(@mod_11_valid_input, min_length: 1, max_length: 40)) do
+      check all(s <- string(@decimal_digits, min_length: 1, max_length: 40)) do
         assert valid_mod_11_weighted?(s <> Checksum.mod_11_weighted(s))
       end
     end
 
     property "check character is X exactly when the input's weighted sum ≡ 1 (mod 11)" do
-      check all(s <- string(@mod_11_valid_input, min_length: 1, max_length: 40)) do
+      check all(s <- string(@decimal_digits, min_length: 1, max_length: 40)) do
         # appending "0" (weight 1) leaves the weighted sum unchanged.
         input_sum = weighted_sum(s <> "0")
 
@@ -86,6 +80,12 @@ defmodule IDUtils.ChecksumTest do
       end
     end
 
+    property "any non-digit byte anywhere raises" do
+      check all(input <- invalid_input()) do
+        assert_raise FunctionClauseError, fn -> Checksum.mod_11_weighted(input) end
+      end
+    end
+
     test "agrees with fixtures on all vectors" do
       for vector <- mod_11_weighted() do
         input = Map.fetch!(vector, "input")
@@ -93,6 +93,80 @@ defmodule IDUtils.ChecksumTest do
 
         assert Checksum.mod_11_weighted(input) == expected
       end
+    end
+  end
+
+  describe "mod_97_10/1" do
+    property "input <> check digit pair always validates (full number ≡ 1 mod 97)" do
+      check all(s <- string(@decimal_digits, min_length: 1, max_length: 40)) do
+        assert valid_mod_97_10?(s <> Checksum.mod_97_10(s))
+      end
+    end
+
+    property "prepending zeros does not change the check digit pair" do
+      check all(
+              s <- string(@decimal_digits, min_length: 1, max_length: 30),
+              zeros <- integer(1..5)
+            ) do
+        assert Checksum.mod_97_10(String.duplicate("0", zeros) <> s) == Checksum.mod_97_10(s)
+      end
+    end
+
+    property "check digit pair is exactly two decimal digits with a value in 02..98" do
+      check all(s <- string(@decimal_digits, min_length: 1, max_length: 40)) do
+        pair = Checksum.mod_97_10(s)
+
+        assert pair =~ ~r/\A\d{2}\z/
+        assert String.to_integer(pair) in 2..98
+      end
+    end
+
+    property "check digit pair is 98 exactly when the input ≡ 0 (mod 97)" do
+      check all(
+              quotient <- integer(0..1_000_000_000),
+              remainder <- one_of([constant(0), integer(1..96)])
+            ) do
+        s = Integer.to_string(97 * quotient + remainder)
+
+        assert Checksum.mod_97_10(s) == "98" == (remainder == 0)
+      end
+    end
+
+    property "any non-digit byte anywhere raises" do
+      check all(input <- invalid_input()) do
+        assert_raise FunctionClauseError, fn -> Checksum.mod_97_10(input) end
+      end
+    end
+
+    test "agrees with fixtures on all vectors" do
+      for vector <- mod_97_10() do
+        input = Map.fetch!(vector, "input")
+        expected = Map.fetch!(vector, "expected")
+
+        assert Checksum.mod_97_10(input) == expected
+      end
+    end
+  end
+
+  # Private helpers
+
+  defp invalid_input do
+    one_of([
+      input_with_non_digit_byte(),
+      member_of(["", "１２３", "١٢٣", nil, 123, ~c"123", <<1::3>>])
+    ])
+  end
+
+  # valid digit string with exactly one non-digit byte inserted at a random position
+  defp input_with_non_digit_byte do
+    gen all(
+          s <- string(@decimal_digits, min_length: 0, max_length: 20),
+          bad <- member_of(Enum.to_list(0..255) -- Enum.to_list(@decimal_digits)),
+          pos <- integer(0..byte_size(s))
+        ) do
+      <<pre::binary-size(^pos), post::binary>> = s
+
+      pre <> <<bad>> <> post
     end
   end
 
@@ -148,5 +222,13 @@ defmodule IDUtils.ChecksumTest do
   end
 
   defp to_mod_11_value(?X), do: 10
-  defp to_mod_11_value(digit) when digit in @mod_11_valid_input, do: digit - ?0
+  defp to_mod_11_value(digit) when digit in @decimal_digits, do: digit - ?0
+
+  # ISO 7064 MOD 97-10
+
+  defp valid_mod_97_10?(full) do
+    full
+    |> String.to_integer()
+    |> Integer.mod(97) == 1
+  end
 end

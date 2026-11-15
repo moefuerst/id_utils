@@ -7,7 +7,7 @@ defmodule IDUtils.Checksum do
   @doc """
   Computes an ISO 7064 MOD 11-2 check character.
 
-  This function expects a parsed payload, excluding the check character and separators.
+  This function expects a string of digits, excluding the check character and separators.
 
   ## Examples
 
@@ -33,7 +33,7 @@ defmodule IDUtils.Checksum do
   1` to `2`; the appended check character has weight `1`. Used in schemes such as ISSN (ISO 3297)
   and ISBN-10 (ISO 2108).
 
-  This function expects a parsed payload, excluding the check character and separators. Callers
+  This function expects a string of digits, excluding the check character and separators. Callers
   own length validation.
 
   ## Examples
@@ -57,6 +57,25 @@ defmodule IDUtils.Checksum do
     |> to_mod_11_check_digit()
   end
 
+  @doc """
+  Computes an ISO 7064 MOD 97-10 check digit pair.
+
+  This function expects a string of digits, excluding the check digits.
+
+  ## Examples
+
+      iex> IDUtils.Checksum.mod_97_10("88649142")
+      "94"
+  """
+  @spec mod_97_10(binary()) :: binary()
+  def mod_97_10(<<_, _::binary>> = digits) do
+    sum = mod_97_10_sum(digits, 0)
+
+    (98 - Integer.mod(sum * 10, 97))
+    |> Integer.to_string()
+    |> String.pad_leading(2, "0")
+  end
+
   # Private helpers
 
   defp mod_11_2_sum(<<digit, rest::binary>>, acc) when digit in ?0..?9 do
@@ -73,4 +92,10 @@ defmodule IDUtils.Checksum do
 
   defp to_mod_11_check_digit(n) when n in 0..9, do: <<?0 + n>>
   defp to_mod_11_check_digit(10), do: "X"
+
+  defp mod_97_10_sum(<<digit, rest::binary>>, acc) when digit in ?0..?9 do
+    mod_97_10_sum(rest, Integer.mod((acc + digit - ?0) * 10, 97))
+  end
+
+  defp mod_97_10_sum(<<>>, acc), do: acc
 end
