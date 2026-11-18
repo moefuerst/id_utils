@@ -1120,9 +1120,10 @@
     "url": "https://openalex.org/W2741809807"
   },
   {
-    "input": "A5010416163",
+    "input": "https://openalex.org/A5010416163",
     "matches": [
-      "openalex"
+      "openalex",
+      "url"
     ],
     "canonical": "A5010416163",
     "url": "https://openalex.org/A5010416163"
