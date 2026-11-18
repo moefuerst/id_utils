@@ -13,6 +13,7 @@ defmodule IDUtils.Scheme.Catalog do
     issn: IDUtils.Schemes.ISSN,
     orcid: IDUtils.Schemes.ORCID,
     isni: IDUtils.Schemes.ISNI,
+    gnd: IDUtils.Schemes.GND,
     ror: IDUtils.Schemes.ROR,
     url: IDUtils.Schemes.URL
   ]

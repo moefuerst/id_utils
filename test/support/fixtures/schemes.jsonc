@@ -3,7 +3,7 @@
 // Copyright 2015-2018 Alan Rubin. Copyright 2025 Will Riley. Copyright 2026 University of
 // Münster. idutils is licensed under a revised BSD license. See NOTICE.
 // Source SHA-256: 47318560b1646208a3d25375ccb1ab34fe75b090d41e2897b2820f99e1949747
-// 
+//
 // Converted to JSON, existing cases have been modified and new cases added.
 [
   {
@@ -723,15 +723,15 @@
       "gnd",
       "url"
     ],
-    "canonical": "gnd:1055864695",
+    "canonical": "1055864695",
     "url": "http://d-nb.info/gnd/1055864695"
   },
   {
-    "input": "GND:4079154-3",
+    "input": "gnd/4079154-3",
     "matches": [
       "gnd"
     ],
-    "canonical": "gnd:4079154-3",
+    "canonical": "4079154-3",
     "url": "http://d-nb.info/gnd/4079154-3"
   },
   {
@@ -739,8 +739,24 @@
     "matches": [
       "gnd"
     ],
-    "canonical": "gnd:4079154-3",
+    "canonical": "4079154-3",
     "url": "http://d-nb.info/gnd/4079154-3"
+  },
+  {
+    "input": "GKD:10095960-X",
+    "matches": [
+      "gnd"
+    ],
+    "canonical": "10095960-X",
+    "url": "http://d-nb.info/gnd/10095960-X"
+  },
+  {
+    "input": "PND:101278391X",
+    "matches": [
+      "gnd"
+    ],
+    "canonical": "101278391X",
+    "url": "http://d-nb.info/gnd/101278391X"
   },
   {
     "input": "SRX3529244",

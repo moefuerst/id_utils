@@ -108,7 +108,7 @@ defmodule IDUtils.Schemes.ORCID do
 
   # ORCID’s format is ISO 27729 compatible
   @spec orcid(binary()) :: {:ok, binary()} | :error
-  def orcid(string), do: ISNI.parse_digits(string)
+  defp orcid(string), do: ISNI.parse_digits(string)
 
   defp in_valid_block?(base) do
     number = String.to_integer(base)

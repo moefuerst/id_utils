@@ -2,12 +2,18 @@ defmodule IDUtils.Checksum do
   @moduledoc false
   # Shared checksum algorithms for identifier schemes.
 
+  @betanumeric "0123456789bcdfghjkmnpqrstvwxz"
+  @betanumeric_ordinals @betanumeric
+                        |> :binary.bin_to_list()
+                        |> Enum.with_index()
+                        |> Map.new()
+
   # Internal API
 
   @doc """
-  Computes an ISO 7064 MOD 11-2 check character.
+  Computes an ISO 7064 MOD 11-2 check digit.
 
-  This function expects a string of digits, excluding the check character and separators.
+  This function expects a string of digits, excluding the check digit and separators.
 
   ## Examples
 
@@ -27,13 +33,13 @@ defmodule IDUtils.Checksum do
   end
 
   @doc """
-  Computes a weighted MOD 11 check character.
+  Computes a weighted MOD 11 check digit.
 
   Weights are derived from the input length. For an `n`-digit payload, weights descend from `n +
-  1` to `2`; the appended check character has weight `1`. Used in schemes such as ISSN (ISO 3297)
-  and ISBN-10 (ISO 2108).
+  1` to `2`, the appended check digit has weight `1`. Used in schemes such as ISSN (ISO 3297),
+  ISBN-10 (ISO 2108), or GND/PPN.
 
-  This function expects a string of digits, excluding the check character and separators. Callers
+  This function expects a string of digits, excluding the check digit and separators. Callers
   own length validation.
 
   ## Examples
@@ -58,6 +64,39 @@ defmodule IDUtils.Checksum do
   end
 
   @doc """
+  Computes a weighted MOD 11 check digit, using the remainder.
+
+  Weights are derived from the input length. For an `n`-digit payload, weights descend from `n +
+  1` to `2`. Unlike `mod_11_weighted/1`, the check digit is the weighted sum modulo 11 itself, not
+  its complement, so it does not satisfy a "sum including the check character is divisible by 11"
+  rule. Used by pre-GND SWD and GKD numbers (See
+  ["Prüfziffernberechnung"](https://wiki.dnb.de/spaces/ILTIS/pages/48139522/Prüfziffernberechnung).
+
+  This function expects a string of digits, excluding the check character and separators. Callers
+  own length validation.
+
+  ## Examples
+
+      iex> IDUtils.Checksum.mod_11_weighted_direct("95980479")
+      "1"
+
+      iex> IDUtils.Checksum.mod_11_weighted_direct("4030318")
+      "4"
+
+      iex> IDUtils.Checksum.mod_11_weighted_direct("4028557")
+      "1"
+  """
+  @spec mod_11_weighted_direct(binary()) :: binary()
+  def mod_11_weighted_direct(<<_, _::binary>> = digits) do
+    weight = byte_size(digits) + 1
+
+    digits
+    |> mod_11_weighted_sum(weight, 0)
+    |> Integer.mod(11)
+    |> to_mod_11_check_digit()
+  end
+
+  @doc """
   Computes an ISO 7064 MOD 97-10 check digit pair.
 
   This function expects a string of digits, excluding the check digits.
@@ -74,6 +113,34 @@ defmodule IDUtils.Checksum do
     (98 - Integer.mod(sum * 10, 97))
     |> Integer.to_string()
     |> String.pad_leading(2, "0")
+  end
+
+  @doc """
+  Computes a NCDA weighted MOD 29 check character.
+
+  This function expects an identifier string exactly as written including separators, excluding
+  the check character. Characters outside the NOID betanumeric character repertoire (such as `/`)
+  contribute zero to the sum but still count toward position, so removing them changes the result.
+  Widely used with the ARK scheme, sometimes also with Handle or DOI.
+
+  ## Examples
+
+      iex> IDUtils.Checksum.ncda("13030xf93gt2")
+      "j"
+
+      iex> IDUtils.Checksum.ncda("13030/xf93gt2")
+      "q"
+
+      iex> IDUtils.Checksum.ncda("")
+      "0"
+  """
+  @spec ncda(binary()) :: binary()
+  def ncda(payload) when is_binary(payload) do
+    sum = ncda_sum(payload, 1, 0)
+
+    sum
+    |> Integer.mod(29)
+    |> to_ncda_check_char()
   end
 
   # Private helpers
@@ -98,4 +165,14 @@ defmodule IDUtils.Checksum do
   end
 
   defp mod_97_10_sum(<<>>, acc), do: acc
+
+  defp ncda_sum(<<byte, rest::binary>>, position, acc) do
+    value = Map.get(@betanumeric_ordinals, byte, 0)
+
+    ncda_sum(rest, position + 1, acc + value * position)
+  end
+
+  defp ncda_sum(<<>>, _position, acc), do: acc
+
+  defp to_ncda_check_char(n) when n in 0..28, do: binary_part(@betanumeric, n, 1)
 end

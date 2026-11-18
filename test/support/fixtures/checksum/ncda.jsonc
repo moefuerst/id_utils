@@ -1,0 +1,76 @@
+// generated with perl Noid (v0.424).
+// input is a payload, expected is the final character of Noid::checkchar(input . "+").
+[
+  {
+    "input": "",
+    "expected": "0"
+  },
+  {
+    "input": "ab",
+    "expected": "p"
+  },
+  {
+    "input": "12",
+    "expected": "5"
+  },
+  {
+    "input": "123",
+    "expected": "g"
+  },
+  {
+    "input": "/b",
+    "expected": "p"
+  },
+  {
+    "input": "!b",
+    "expected": "p"
+  },
+  {
+    "input": "b!",
+    "expected": "b"
+  },
+  {
+    "input": "0",
+    "expected": "0"
+  },
+  {
+    "input": "z",
+    "expected": "z"
+  },
+  {
+    "input": "12345/ft0",
+    "expected": "n"
+  },
+  {
+    "input": "12345/ft9",
+    "expected": "f"
+  },
+  {
+    "input": "13030/ft000",
+    "expected": "d"
+  },
+  {
+    "input": "abc//ft0",
+    "expected": "9"
+  },
+  {
+    "input": "ARK:/ft0",
+    "expected": "g"
+  },
+  {
+    "input": "0123456789bcdfghjkmnpqrstvwxz",
+    "expected": "0"
+  },
+  {
+    "input": "0123456789bcdfghjkmnpqrstvwxz0",
+    "expected": "0"
+  },
+  {
+    "input": "0123456789bcdfghjkmnpqrstvwxz0123456789bcdfghjkmnpqrstvwxz",
+    "expected": "0"
+  },
+  {
+    "input": "!b!c!d",
+    "expected": "p"
+  }
+]

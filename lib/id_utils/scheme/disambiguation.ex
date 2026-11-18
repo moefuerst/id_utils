@@ -14,8 +14,9 @@ defmodule IDUtils.Scheme.Disambiguation do
   # the function receives the value for which the detection is run
   @suppression_rules %{
     url: [
+      {:handle, &__MODULE__.no_handle_prefix?/1},
       :issn,
-      {:handle, &__MODULE__.no_handle_prefix?/1}
+      :urn
     ],
     isni: [
       :gnd,
@@ -28,6 +29,9 @@ defmodule IDUtils.Scheme.Disambiguation do
       :gnd
     ],
     ark: [
+      :handle
+    ],
+    gnd: [
       :handle
     ],
     doi: [
