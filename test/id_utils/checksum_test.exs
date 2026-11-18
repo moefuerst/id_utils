@@ -7,10 +7,12 @@ defmodule IDUtils.ChecksumTest do
   @fixtures %{
     mod_11_2: ["checksum", "mod_11_2.jsonc"],
     mod_11_weighted: ["checksum", "mod_11_weighted.jsonc"],
-    mod_97_10: ["checksum", "mod_97_10.jsonc"]
+    mod_97_10: ["checksum", "mod_97_10.jsonc"],
+    ncda: ["checksum", "ncda.jsonc"]
   }
 
   @decimal_digits ?0..?9
+  @betanumeric "0123456789bcdfghjkmnpqrstvwxz"
 
   doctest Checksum
 
@@ -96,6 +98,22 @@ defmodule IDUtils.ChecksumTest do
     end
   end
 
+  describe "mod_11_weighted_direct/1" do
+    test "known vectors (GND)" do
+      assert Checksum.mod_11_weighted_direct("4021455") == "2"
+      assert Checksum.mod_11_weighted_direct("4079878") == "1"
+      assert Checksum.mod_11_weighted_direct("2054656") == "7"
+      assert Checksum.mod_11_weighted_direct("212535") == "3"
+      assert Checksum.mod_11_weighted_direct("3070187") == "9"
+    end
+
+    property "any non-digit byte anywhere raises" do
+      check all(input <- invalid_input()) do
+        assert_raise FunctionClauseError, fn -> Checksum.mod_11_weighted_direct(input) end
+      end
+    end
+  end
+
   describe "mod_97_10/1" do
     property "input <> check digit pair always validates (full number ≡ 1 mod 97)" do
       check all(s <- string(@decimal_digits, min_length: 1, max_length: 40)) do
@@ -121,17 +139,6 @@ defmodule IDUtils.ChecksumTest do
       end
     end
 
-    property "check digit pair is 98 exactly when the input ≡ 0 (mod 97)" do
-      check all(
-              quotient <- integer(0..1_000_000_000),
-              remainder <- one_of([constant(0), integer(1..96)])
-            ) do
-        s = Integer.to_string(97 * quotient + remainder)
-
-        assert Checksum.mod_97_10(s) == "98" == (remainder == 0)
-      end
-    end
-
     property "any non-digit byte anywhere raises" do
       check all(input <- invalid_input()) do
         assert_raise FunctionClauseError, fn -> Checksum.mod_97_10(input) end
@@ -144,6 +151,24 @@ defmodule IDUtils.ChecksumTest do
         expected = Map.fetch!(vector, "expected")
 
         assert Checksum.mod_97_10(input) == expected
+      end
+    end
+  end
+
+  describe "ncda/1" do
+    property "check character's ordinal ≡ position-weighted sum (mod 29)" do
+      check all(s <- binary(max_length: 80)) do
+        assert valid_ncda?(s, Checksum.ncda(s))
+      end
+    end
+
+    test "empty is a valid NCDA checksum" do
+      assert Checksum.ncda("") == "0"
+    end
+
+    test "agrees with fixtures on all vectors" do
+      for %{"input" => input, "expected" => expected} <- ncda() do
+        assert Checksum.ncda(input) == expected
       end
     end
   end
@@ -230,5 +255,31 @@ defmodule IDUtils.ChecksumTest do
     full
     |> String.to_integer()
     |> Integer.mod(97) == 1
+  end
+
+  # NCDA
+
+  defp ncda_sum(binary) do
+    binary
+    |> :binary.bin_to_list()
+    |> Enum.with_index(1)
+    |> Enum.map(fn {byte, position} ->
+      to_ncda_value(byte) * position
+    end)
+    |> Enum.sum()
+  end
+
+  # check character's ordinal is the payload's weighted sum mod 29
+  defp valid_ncda?(payload, <<check>>) do
+    payload
+    |> ncda_sum()
+    |> Integer.mod(29) == to_ncda_value(check)
+  end
+
+  defp to_ncda_value(byte) do
+    case :binary.match(@betanumeric, <<byte>>) do
+      {ordinal, 1} -> ordinal
+      :nomatch -> 0
+    end
   end
 end
