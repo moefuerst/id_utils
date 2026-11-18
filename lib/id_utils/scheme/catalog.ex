@@ -15,6 +15,7 @@ defmodule IDUtils.Scheme.Catalog do
     isni: IDUtils.Schemes.ISNI,
     gnd: IDUtils.Schemes.GND,
     ror: IDUtils.Schemes.ROR,
+    openalex: IDUtils.Schemes.OpenAlex,
     url: IDUtils.Schemes.URL
   ]
 
