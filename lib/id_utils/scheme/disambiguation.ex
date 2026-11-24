@@ -7,6 +7,7 @@ defmodule IDUtils.Scheme.Disambiguation do
   alias IDUtils.Schemes.Handle
   alias IDUtils.Schemes.ISNI
   alias IDUtils.Schemes.RAID
+  alias IDUtils.Schemes.VIAF
 
   # matched scheme -> list of schemes to drop if matched scheme is present
   #
@@ -26,7 +27,8 @@ defmodule IDUtils.Scheme.Disambiguation do
       :gnd
     ],
     issn: [
-      :gnd
+      :gnd,
+      :viaf
     ],
     ark: [
       :handle
@@ -36,6 +38,9 @@ defmodule IDUtils.Scheme.Disambiguation do
     ],
     doi: [
       {:raid, &__MODULE__.no_raid_prefix?/1}
+    ],
+    viaf: [
+      {:handle, &VIAF.prefix?/1}
     ]
   }
 
