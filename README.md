@@ -3,78 +3,70 @@
 Utilities for working with persistent identifiers used in scholarly communication.
 
 
+## Features
+
+Match and normalize identifiers:
+
+```elixir
+iex> IDUtils.matches_scheme?("000000029079593X", :orcid)
+true
+
+iex> IDUtils.normalize("000000029079593X", :orcid)
+{:ok, "0000-0002-9079-593X"}
+```
+
+Detect common persistent identifier schemes:
+
+```elixir
+iex> IDUtils.detect_schemes("0000000218250097")
+[:orcid, :isni]
+
+iex> IDUtils.detect_schemes("urn:doi:10.1093/annonc/mdz260.023")
+[:doi, :handle, :urn]
+```
+
+Create links for resolvable identifiers:
+
+```elixir
+iex> IDUtils.to_url("0000000121480099", :isni)
+{:ok, "https://isni.org/isni/0000000121480099"}
+
+iex> IDUtils.to_uri("10.5281/zenodo.15293455", :doi)
+{:ok, %URI{scheme: "https", host: "doi.org", path: "/10.5281/zenodo.15293455", port: 443}}
+```
+
+Supported Schemes: ARK, DOI, GND, Handle, ISNI, ISSN, OpenAlex ID, ORCID, RAID, ROR, URL, URN, 
+VIAF.
+
+Extendable: Implement the `IDUtils.Scheme` behaviour for your custom schemes.
+
+
+## 🚧 Status
+
+IDUtils is in 0.x. The library is functional and covered by tests, but the API may change between 
+minor versions. Pin an exact version in your `deps` if you need stability across upgrades.
+
+
 ## Installation
 
-Add `id_utils` to your dependencies in `mix.exs`:
+Add `id_utils` to your dependencies in `mix.exs` (requires Elixir v1.18+):
 
 ```elixir
 def deps do
   [
-    {:id_utils, git: "https://github.com/moefuerst/id_utils.git", tag: "0.0.1"}
+    {:id_utils, "~> 0.1"}
   ]
 end
 ```
 
-
-## Development
-
-You can develop IDUtils on your local machine directly or using the provided dev container.
-
-### Using Local Elixir/Erlang
-
-Make sure Elixir and Erlang are available on your development machine. The required local tool 
-versions are listed in `mise.toml` for use with [mise-en-place](https://mise.jdx.dev/) or similar
-tools.
-
-1. Navigate to the project directory and install the required Elixir and Erlang versions
-   (if using `mise`):
-   ```bash
-   mise install
-   ```
-2. Fetch dependencies:
-   ```bash
-   mix deps.get
-   ```
-3. Compile the project:
-   ```bash
-   mix compile
-   ```
-4. Start the project in interactive mode (dev env):
-   ```bash
-   iex -S mix
-   ```
-
-### Using Docker
-
-1. Fetch and install dependencies:
-   ```bash
-   make deps
-   ```
-2. Start a local development container:
-   ```bash
-   make dev
-   ```
-
-This will drop you into an interactive bash shell inside an ephemeral application container. From
-there, you can start an IEx shell and run the project in interactive mode with `iex -S mix`.
-
-Your local working directory is mounted inside the container for development using the editing
-tools on your development machine. Dependencies and build artifacts are cached in named Docker 
-volumes and persist across sessions.
-
-To show all available targets, run
-
-```bash
-make help
-```
-
-Alternatively, a `devcontainer.json` spec file is provided for use with tools supporting 
-[dev containers](https://containers.dev).
+IDUtils is dependency-free and does not require any additional libraries.
 
 
 ## Documentation
 
-To generate the project documentation locally, run:
+The project documentation is [available via HexDocs](https://id-utils.hexdocs.pm).
+
+To generate it locally, run:
 
 ```bash
 mix docs
@@ -83,37 +75,19 @@ mix docs
 You can then open `doc/index.html` in your browser.
 
 
-## Tests
-
-```bash
-mix test
-```
-
-
-## Code quality checks
-
-The codebase is set up to perform quality checks using `credo`, `dialyzer` and the `styler` format
-plugin. It's usually faster to not bother with individual checks and use one of the following 
-aliases to run all of them.
-
-To format your code, run all static analysis tools, and run the test suite, use:
-
-```bash
-mix precommit
-```
-
-For the checks that are performed by CI, use:
-
-```bash
-mix check
-```
-
-
 ## Contributing
 
 Feedback, bug reports, feature requests, and other contributions are most welcome. Please open an
 [Issue](https://github.com/moefuerst/id_utils/issues) first if your change is larger in scope.
-Please run `mix precommit` before committing your changes and `mix check` before pushing a branch.
+See `CONTRIBUTING.md` for more information.
+
+
+## Acknowledgments
+
+IDUtils is inspired by [inveniosoftware/idutils](https://github.com/inveniosoftware/idutils) and
+is informed by its design and behavior (results differ from the Python library in places). Part of
+the test data is derived from that project's test suite (see `NOTICE`). IDUtils is an independent
+project and is not affiliated with or endorsed by CERN or Invenio.
 
 
 ## License
