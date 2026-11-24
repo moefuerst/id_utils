@@ -29,7 +29,7 @@ defmodule IDUtils.Scheme.DisambiguationTest do
 
     property "unrelated matches retain their order" do
       check all(schemes <- scheme_list(), value <- value()) do
-        supressed = [:url, :issn, :handle, :raid, :urn, :gnd]
+        supressed = [:url, :issn, :handle, :raid, :urn, :gnd, :viaf]
 
         result = Disambiguation.apply(schemes, value)
 
