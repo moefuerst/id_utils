@@ -1,7 +1,7 @@
 defmodule IDUtils.MixProject do
   use Mix.Project
 
-  @version "0.0.1"
+  @version "0.1.0"
   @description "Utilities for persistent identifiers used in scholarly communication"
   @source_url "https://github.com/moefuerst/id_utils"
 
@@ -13,6 +13,7 @@ defmodule IDUtils.MixProject do
       elixirc_paths: elixirc_paths(Mix.env()),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
+      hex: hex(),
       deps: deps(),
       description: @description,
       package: package(),
@@ -92,17 +93,32 @@ defmodule IDUtils.MixProject do
 
   defp docs do
     [
-      main: "readme",
       source_ref: "v#{@version}",
       source_url: @source_url,
-      extras: ["README.md"]
+      extras: ["README.md", "CHANGELOG.md"],
+      groups_for_modules: groups_for_modules(),
+      skip_undefined_reference_warnings_on: ["CHANGELOG.md"]
+    ]
+  end
+
+  defp groups_for_modules do
+    [
+      "Identifier Schemes": [
+        ~r{IDUtils\.Scheme}
+      ]
+    ]
+  end
+
+  defp hex do
+    [
+      cooldown: "10d"
     ]
   end
 
   defp package do
     [
       name: :id_utils,
-      files: ~w(lib priv .formatter.exs mix.exs README* LICENSE* CHANGELOG*),
+      files: ~w(lib priv .formatter.exs mix.exs README* LICENSE* NOTICE* CHANGELOG*),
       licenses: ["BSD-3-Clause"],
       maintainers: ["Moritz F. Fürst"],
       source_url: @source_url,
