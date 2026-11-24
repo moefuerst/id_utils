@@ -20,13 +20,13 @@ defmodule IDUtilsTest do
     end
   end
 
-  describe "match?/3" do
+  describe "matches_scheme?/3" do
     test "agrees with fixtures on all valid vectors" do
       for vector <- cases() do
         scheme = expected_best_match(vector)
         input = input(vector)
 
-        assert IDUtils.match?(input, scheme)
+        assert IDUtils.matches_scheme?(input, scheme)
       end
     end
   end
