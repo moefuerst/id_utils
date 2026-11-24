@@ -265,6 +265,9 @@
              library_modules: []
            ]},
           {Jump.CredoChecks.WeakAssertion, []},
+          {Jump.CredoChecks.NoManualContentDisposition, []},
+          {Jump.CredoChecks.AvoidModifyingStructBeforeChangeset, []},
+          {Jump.CredoChecks.NoWordSigilInterpolation, []},
 
           #
           # Oeditus
@@ -385,9 +388,12 @@
                {MyApp.LiveHelpers, :assign_tenant, 3}
              ]
            ]},
+          {Jump.CredoChecks.LiveViewPubSubRequiresConnected, []},
           {Jump.CredoChecks.UseObanProWorker, []},
 
           # Oeditus
+          {OeditusCredo.Check.Refactoring.ChangeRiskAntiPatterns, []},
+          {OeditusCredo.Check.Warning.UnsafeMapAccess, []},
           {OeditusCredo.Check.Readability.UnnecessaryInterpolatingSigil, []},
           {OeditusCredo.Check.Refactoring.PreferCasePatternMatching, []},
           {OeditusCredo.Check.Refactoring.AvoidSinglePipe, []},
